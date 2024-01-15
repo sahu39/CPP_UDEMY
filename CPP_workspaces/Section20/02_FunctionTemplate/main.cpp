@@ -17,6 +17,9 @@ struct Person
 {
     std::string name;
     int age;
+    bool operator<(const Person &hrs)const{
+        return this->age < hrs.age;
+    }
 };
 
 int main()
@@ -24,6 +27,7 @@ int main()
     Person p1 {"Sunil",31};
     Person p2 {"Swagat",24};
     Person p3 = min(p1,p2);
+    std::cout << p3.name << " is younger" << std::endl;
     std::cout << min<int>(7,8) << std::endl; //7
     std::cout << min(7,8) << std::endl;      //7
     std::cout << min('A','B') << std::endl;  //A
