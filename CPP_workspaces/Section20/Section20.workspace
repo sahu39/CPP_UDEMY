@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="Section20" Database="" Version="10000">
+  <Project Name="01_STL" Path="01_STL/01_STL.project" Active="No"/>
+  <Project Name="02_FunctionTemplate" Path="02_FunctionTemplate/02_FunctionTemplate.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="01_STL" ConfigName="Debug"/>
+      <Project Name="02_FunctionTemplate" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Environment/>
+      <Project Name="01_STL" ConfigName="Release"/>
+      <Project Name="02_FunctionTemplate" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

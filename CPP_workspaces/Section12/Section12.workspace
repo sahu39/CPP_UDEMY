@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="Section12" Database="" Version="10000">
+  <Project Name="Pointer01" Path="Pointer01/Pointer01.project" Active="No"/>
+  <Project Name="PointerDereferencing" Path="PointerDereferencing/PointerDereferencing.project" Active="No"/>
+  <Project Name="PointerDynamicMemoryAllocation" Path="PointerDynamicMemoryAllocation/PointerDynamicMemoryAllocation.project" Active="Yes"/>
+  <Project Name="ArrayandPointers" Path="ArrayandPointers/ArrayandPointers.project" Active="No"/>
+  <Project Name="Pointer_arithmatics" Path="Pointer_arithmatics/Pointer_arithmatics.project" Active="No"/>
+  <Project Name="PassingPointerAsFunctionParameter" Path="PassingPointerAsFunctionParameter/PassingPointerAsFunctionParameter.project" Active="No"/>
+  <Project Name="PassingPointerAsFunctionParameter2" Path="PassingArrayAsFunctionParameter2/PassingArrayAsFunctionParameter2.project" Active="No"/>
+  <Project Name="FunctionReturningPointer" Path="FunctionReturningPointer/FunctionReturningPointer.project" Active="No"/>
+  <Project Name="Reference" Path="Reference/Reference.project" Active="No"/>
+  <Project Name="Debugger" Path="Debugger/Debugger.project" Active="No"/>
+  <Project Name="Section12_Challenge" Path="Section12_Challenge/Section12_Challenge.project" Active="No"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="Pointer01" ConfigName="Debug"/>
+      <Project Name="PointerDereferencing" ConfigName="Debug"/>
+      <Project Name="PointerDynamicMemoryAllocation" ConfigName="Debug"/>
+      <Project Name="ArrayandPointers" ConfigName="Debug"/>
+      <Project Name="Pointer_arithmatics" ConfigName="Debug"/>
+      <Project Name="PassingPointerAsFunctionParameter" ConfigName="Debug"/>
+      <Project Name="PassingPointerAsFunctionParameter2" ConfigName="Debug"/>
+      <Project Name="FunctionReturningPointer" ConfigName="Debug"/>
+      <Project Name="Reference" ConfigName="Debug"/>
+      <Project Name="Debugger" ConfigName="Debug"/>
+      <Project Name="Section12_Challenge" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Environment/>
+      <Project Name="Pointer01" ConfigName="Release"/>
+      <Project Name="PointerDereferencing" ConfigName="Release"/>
+      <Project Name="PointerDynamicMemoryAllocation" ConfigName="Release"/>
+      <Project Name="ArrayandPointers" ConfigName="Release"/>
+      <Project Name="Pointer_arithmatics" ConfigName="Release"/>
+      <Project Name="PassingPointerAsFunctionParameter" ConfigName="Release"/>
+      <Project Name="PassingPointerAsFunctionParameter2" ConfigName="Release"/>
+      <Project Name="FunctionReturningPointer" ConfigName="Release"/>
+      <Project Name="Reference" ConfigName="Release"/>
+      <Project Name="Debugger" ConfigName="Release"/>
+      <Project Name="Section12_Challenge" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

@@ -1,0 +1,52 @@
+STL----->Standard Template Libraries:
+=======================================
+-STL is a library of powerful, reusable, generic classes and functions implemented using c++.
+
+-Implements common data structures and algorithms.
+
+
+
+
+Assortment of commonly used containers.
+
+
+Elements of STLs:
+=====================
+Containers:
+------------
+Collection of objects or primitive types.
+(array,vector,deque,stack,set,map etc.)
+
+
+
+Algorithms:(Around 60 algorithms)
+----------
+Functions sequence of elements from containers.
+(find,max,count,accumulate,sort,etc.)
+
+
+Iterators:
+-------------
+Generates sequence of elements from containers
+(forward,Reverse,by Value,by reference,constant,etc.)
+
+
+
+accumulate not a part of std:
+------------------------------
+https://stackoverflow.com/questions/71982615/accumulate-not-a-part-of-std
+
+
+
+
+
+
+Template :
+===========
+template <typename T>---template for functions
+template <class T>------template for class
+
+T max(T a, T b)
+{
+	return (a > b) ? a : b;
+}

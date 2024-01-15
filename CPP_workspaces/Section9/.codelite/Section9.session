@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Session Name="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\Section9.workspace">
+  <int Value="11" Name="m_selectedTab"/>
+  <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\Section9.workspace" Name="m_workspaceName"/>
+  <TabInfoArray Name="TabInfoArray">
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\NestedIfelse\main.cpp" Name="FileName"/>
+      <int Value="9" Name="FirstVisibleLine"/>
+      <int Value="28" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\Switch\main.cpp" Name="FileName"/>
+      <int Value="15" Name="FirstVisibleLine"/>
+      <int Value="16" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\SwitchEnum\main.cpp" Name="FileName"/>
+      <int Value="14" Name="FirstVisibleLine"/>
+      <int Value="15" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\ConditionalOperator\main.cpp" Name="FileName"/>
+      <int Value="7" Name="FirstVisibleLine"/>
+      <int Value="8" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\ForLoop\main.cpp" Name="FileName"/>
+      <int Value="27" Name="FirstVisibleLine"/>
+      <int Value="28" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\RangeBasedForLoop\main.cpp" Name="FileName"/>
+      <int Value="40" Name="FirstVisibleLine"/>
+      <int Value="41" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\WhileLoop\main.cpp" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="0" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\doWhileLoop\main.cpp" Name="FileName"/>
+      <int Value="37" Name="FirstVisibleLine"/>
+      <int Value="50" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds">
+        <IntVectorItem Value="30"/>
+      </IntVector>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\ContinueandBreak\main.cpp" Name="FileName"/>
+      <int Value="13" Name="FirstVisibleLine"/>
+      <int Value="14" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\NestedLoops\main.cpp" Name="FileName"/>
+      <int Value="8" Name="FirstVisibleLine"/>
+      <int Value="9" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\Histogram\main.cpp" Name="FileName"/>
+      <int Value="16" Name="FirstVisibleLine"/>
+      <int Value="17" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section9\Section9Challenge\main.cpp" Name="FileName"/>
+      <int Value="81" Name="FirstVisibleLine"/>
+      <int Value="100" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+  </TabInfoArray>
+  <SerializedObject Name="m_breakpoints">
+    <long Value="0" Name="Count"/>
+  </SerializedObject>
+  <wxString Value="*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.inc;*.mm;*.m;*.xrc;*.xml;*.json;*.sql;*.txt;*.plist;CMakeLists.txt;*.rc;*.iss" Name="m_findInFilesMask"/>
+</Session>

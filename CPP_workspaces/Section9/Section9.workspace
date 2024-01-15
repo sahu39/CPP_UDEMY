@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="Section9" Database="" Version="10000">
+  <Project Name="NestedIfelse" Path="NestedIfelse/NestedIfelse.project" Active="No"/>
+  <Project Name="Switch" Path="Switch/Switch.project" Active="No"/>
+  <Project Name="SwitchEnum" Path="SwitchEnum/SwitchEnum.project" Active="No"/>
+  <Project Name="ConditionalOperator" Path="ConditionalOperator/ConditionalOperator.project" Active="No"/>
+  <Project Name="ForLoop" Path="ForLoop/ForLoop.project" Active="No"/>
+  <Project Name="RangeBasedForLoop" Path="RangeBasedForLoop/RangeBasedForLoop.project" Active="No"/>
+  <Project Name="WhileLoop" Path="WhileLoop/WhileLoop.project" Active="No"/>
+  <Project Name="doWhileLoop" Path="doWhileLoop/doWhileLoop.project" Active="No"/>
+  <Project Name="ContinueandBreak" Path="ContinueandBreak/ContinueandBreak.project" Active="No"/>
+  <Project Name="NestedLoops" Path="NestedLoops/NestedLoops.project" Active="No"/>
+  <Project Name="Histogram" Path="Histogram/Histogram.project" Active="No"/>
+  <Project Name="Section9Challenge" Path="Section9Challenge/Section9Challenge.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="NestedIfelse" ConfigName="Debug"/>
+      <Project Name="Switch" ConfigName="Debug"/>
+      <Project Name="SwitchEnum" ConfigName="Debug"/>
+      <Project Name="ConditionalOperator" ConfigName="Debug"/>
+      <Project Name="ForLoop" ConfigName="Debug"/>
+      <Project Name="RangeBasedForLoop" ConfigName="Debug"/>
+      <Project Name="WhileLoop" ConfigName="Debug"/>
+      <Project Name="doWhileLoop" ConfigName="Debug"/>
+      <Project Name="ContinueandBreak" ConfigName="Debug"/>
+      <Project Name="NestedLoops" ConfigName="Debug"/>
+      <Project Name="Histogram" ConfigName="Debug"/>
+      <Project Name="Section9Challenge" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Environment/>
+      <Project Name="NestedIfelse" ConfigName="Release"/>
+      <Project Name="Switch" ConfigName="Release"/>
+      <Project Name="SwitchEnum" ConfigName="Release"/>
+      <Project Name="ConditionalOperator" ConfigName="Release"/>
+      <Project Name="ForLoop" ConfigName="Release"/>
+      <Project Name="RangeBasedForLoop" ConfigName="Release"/>
+      <Project Name="WhileLoop" ConfigName="Release"/>
+      <Project Name="doWhileLoop" ConfigName="Release"/>
+      <Project Name="ContinueandBreak" ConfigName="Release"/>
+      <Project Name="NestedLoops" ConfigName="Release"/>
+      <Project Name="Histogram" ConfigName="Release"/>
+      <Project Name="Section9Challenge" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

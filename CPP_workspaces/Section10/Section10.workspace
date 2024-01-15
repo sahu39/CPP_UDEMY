@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="Section10" Database="" Version="10000">
+  <Project Name="Cpp_string" Path="Cpp_string/Cpp_string.project" Active="No"/>
+  <Project Name="Cpp_string2" Path="Cpp_string2/Cpp_string2.project" Active="No"/>
+  <Project Name="CPP_exercise01" Path="CPP_exercise01/CPP_exercise01.project" Active="No"/>
+  <Project Name="CPP_exercise02" Path="CPP_exercise02/CPP_exercise02.project" Active="No"/>
+  <Project Name="Section10_challenge" Path="Section10_challenge/Section10_challenge.project" Active="No"/>
+  <Project Name="Section10_challenge2" Path="Section10_challenge2/Section10_challenge2.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="Cpp_string" ConfigName="Debug"/>
+      <Project Name="Cpp_string2" ConfigName="Debug"/>
+      <Project Name="CPP_exercise01" ConfigName="Debug"/>
+      <Project Name="CPP_exercise02" ConfigName="Debug"/>
+      <Project Name="Section10_challenge" ConfigName="Debug"/>
+      <Project Name="Section10_challenge2" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Environment/>
+      <Project Name="Cpp_string" ConfigName="Release"/>
+      <Project Name="Cpp_string2" ConfigName="Release"/>
+      <Project Name="CPP_exercise01" ConfigName="Release"/>
+      <Project Name="CPP_exercise02" ConfigName="Release"/>
+      <Project Name="Section10_challenge" ConfigName="Release"/>
+      <Project Name="Section10_challenge2" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="Section13" Database="" Version="10000">
+  <Project Name="01_CreateClassObject" Path="01_CreateClassObject/01_CreateClassObject.project" Active="No"/>
+  <Project Name="02_AccessClassObject" Path="02_AccessClassObject/02_AccessClassObject.project" Active="No"/>
+  <Project Name="03_ImplementingMethods_01" Path="03_ImplementingMethods_01/03_ImplementingMethods_01.project" Active="No"/>
+  <Project Name="03_ImplementingMethods_02" Path="03_ImplementingMethods_02/03_ImplementingMethods_02.project" Active="No"/>
+  <Project Name="04_ConstructorDestructor" Path="04_Constructor&amp;Destructor/04_Constructor&amp;Destructor.project" Active="No"/>
+  <Project Name="05_DefaultConstructor" Path="05_DefaultConstructor/05_DefaultConstructor.project" Active="No"/>
+  <Project Name="05_DefaultConstructor_02" Path="05_DefaultConstructor_02/05_DefaultConstructor_02.project" Active="No"/>
+  <Project Name="05_DefaultConstructor_03" Path="05_DefaultConstructor_03/05_DefaultConstructor_03.project" Active="No"/>
+  <Project Name="06_OverLoadingConstructor" Path="06_OverLoadingConstructor/06_OverLoadingConstructor.project" Active="No"/>
+  <Project Name="07_ConstructorInitializationList" Path="07_ConstructorInitializationList/07_ConstructorInitializationList.project" Active="No"/>
+  <Project Name="08_DelegatingConstructor" Path="08_DelegatingConstructor/08_DelegatingConstructor.project" Active="No"/>
+  <Project Name="09_DefaultConstructorParameter" Path="09_DefaultConstructorParameter/09_DefaultConstructorParameter.project" Active="No"/>
+  <Project Name="10_CopyConstructor01" Path="10_CopyConstructor01/10_CopyConstructor01.project" Active="No"/>
+  <Project Name="10_CopyConstructor02" Path="10_CopyConstructor02/10_CopyConstructor02.project" Active="No"/>
+  <Project Name="11_ShallowCopy" Path="11_ShallowCopy/11_ShallowCopy.project" Active="No"/>
+  <Project Name="12_DeepCopy" Path="12_DeepCopy/12_DeepCopy.project" Active="No"/>
+  <Project Name="13_MoveConstructor" Path="13_MoveConstructor/13_MoveConstructor.project" Active="No"/>
+  <Project Name="13_LvalueRvalueDemo" Path="13_LvalueRvalueDemo/13_LvalueRvalueDemo.project" Active="No"/>
+  <Project Name="14_ThisPointer" Path="14_ThisPointer/14_ThisPointer.project" Active="No"/>
+  <Project Name="15_ConstinClass" Path="15_ConstinClass/15_ConstinClass.project" Active="No"/>
+  <Project Name="16_StaticDataMember" Path="16_StaticDataMember/16_StaticDataMember.project" Active="No"/>
+  <Project Name="Challenge" Path="Challenge/Challenge.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="01_CreateClassObject" ConfigName="Debug"/>
+      <Project Name="02_AccessClassObject" ConfigName="Debug"/>
+      <Project Name="03_ImplementingMethods_01" ConfigName="Debug"/>
+      <Project Name="03_ImplementingMethods_02" ConfigName="Debug"/>
+      <Project Name="04_ConstructorDestructor" ConfigName="Debug"/>
+      <Project Name="05_DefaultConstructor" ConfigName="Debug"/>
+      <Project Name="05_DefaultConstructor_02" ConfigName="Debug"/>
+      <Project Name="05_DefaultConstructor_03" ConfigName="Debug"/>
+      <Project Name="06_OverLoadingConstructor" ConfigName="Debug"/>
+      <Project Name="07_ConstructorInitializationList" ConfigName="Debug"/>
+      <Project Name="08_DelegatingConstructor" ConfigName="Debug"/>
+      <Project Name="09_DefaultConstructorParameter" ConfigName="Debug"/>
+      <Project Name="10_CopyConstructor01" ConfigName="Debug"/>
+      <Project Name="10_CopyConstructor02" ConfigName="Debug"/>
+      <Project Name="11_ShallowCopy" ConfigName="Debug"/>
+      <Project Name="12_DeepCopy" ConfigName="Debug"/>
+      <Project Name="13_MoveConstructor" ConfigName="Debug"/>
+      <Project Name="13_LvalueRvalueDemo" ConfigName="Debug"/>
+      <Project Name="14_ThisPointer" ConfigName="Debug"/>
+      <Project Name="15_ConstinClass" ConfigName="Debug"/>
+      <Project Name="16_StaticDataMember" ConfigName="Debug"/>
+      <Project Name="Challenge" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Environment/>
+      <Project Name="01_CreateClassObject" ConfigName="Release"/>
+      <Project Name="02_AccessClassObject" ConfigName="Release"/>
+      <Project Name="03_ImplementingMethods_01" ConfigName="Release"/>
+      <Project Name="03_ImplementingMethods_02" ConfigName="Release"/>
+      <Project Name="04_ConstructorDestructor" ConfigName="Release"/>
+      <Project Name="05_DefaultConstructor" ConfigName="Release"/>
+      <Project Name="05_DefaultConstructor_02" ConfigName="Release"/>
+      <Project Name="05_DefaultConstructor_03" ConfigName="Release"/>
+      <Project Name="06_OverLoadingConstructor" ConfigName="Release"/>
+      <Project Name="07_ConstructorInitializationList" ConfigName="Release"/>
+      <Project Name="08_DelegatingConstructor" ConfigName="Release"/>
+      <Project Name="09_DefaultConstructorParameter" ConfigName="Release"/>
+      <Project Name="10_CopyConstructor01" ConfigName="Release"/>
+      <Project Name="10_CopyConstructor02" ConfigName="Release"/>
+      <Project Name="11_ShallowCopy" ConfigName="Release"/>
+      <Project Name="12_DeepCopy" ConfigName="Release"/>
+      <Project Name="13_MoveConstructor" ConfigName="Release"/>
+      <Project Name="13_LvalueRvalueDemo" ConfigName="Release"/>
+      <Project Name="14_ThisPointer" ConfigName="Release"/>
+      <Project Name="15_ConstinClass" ConfigName="Release"/>
+      <Project Name="16_StaticDataMember" ConfigName="Release"/>
+      <Project Name="Challenge" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

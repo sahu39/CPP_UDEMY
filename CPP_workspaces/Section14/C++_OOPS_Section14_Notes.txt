@@ -1,0 +1,19 @@
+															Opearator Overloading
+															---------------------
+-Allows user defined types to behave similar to built-in types.
+-Using traditional operators such as +,-,=,* with user defined types.
+	e.g: 
+	----
+	+ is used for adding two data types of either integer,double or float etc. traditionally. Using Operator overloading concept we can
+    define behaviour like add 2 class object or add 2 srings(Appending 2 strings using +) etc.
+	
+-Following Operators can not be overloaded.
+	::
+	:?
+	.*
+	.
+	sizeof
+
+	
+-Assignment operators overloading:
+=======================================

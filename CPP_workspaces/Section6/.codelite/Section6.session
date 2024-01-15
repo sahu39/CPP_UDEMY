@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Session Name="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section6\Section6.workspace">
+  <int Value="1" Name="m_selectedTab"/>
+  <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section6\Section6.workspace" Name="m_workspaceName"/>
+  <TabInfoArray Name="TabInfoArray">
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section6\InitializingVariable\main.cpp" Name="FileName"/>
+      <int Value="10" Name="FirstVisibleLine"/>
+      <int Value="21" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="D:\Studies\CPP_udemy_practice\CPP_workspaces\Section6\SizeofVariables\main.cpp" Name="FileName"/>
+      <int Value="15" Name="FirstVisibleLine"/>
+      <int Value="34" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+  </TabInfoArray>
+  <SerializedObject Name="m_breakpoints">
+    <long Value="0" Name="Count"/>
+  </SerializedObject>
+  <wxString Value="*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.inc;*.mm;*.m;*.xrc;*.xml;*.json;*.sql;*.txt;*.plist;CMakeLists.txt;*.rc;*.iss" Name="m_findInFilesMask"/>
+</Session>

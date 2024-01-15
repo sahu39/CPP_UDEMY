@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="Section14" Database="" Version="10000">
+  <Project Name="01_Mystring-start" Path="01_Mystring-start/01_Mystring-start.project" Active="Yes"/>
+  <Project Name="Section20" Path="Section20/Section20.project"/>
+  <Project Name="Section20" Path="../Section20/Section20.project"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="01_Mystring-start" ConfigName="Debug"/>
+      <Project Name="Section20" ConfigName="Debug"/>
+      <Project Name="Section20" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Environment/>
+      <Project Name="01_Mystring-start" ConfigName="Release"/>
+      <Project Name="Section20" ConfigName="Release"/>
+      <Project Name="Section20" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

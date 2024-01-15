@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="Section11" Database="" Version="10000">
+  <Project Name="Function_eg" Path="Function_eg/Function_eg.project" Active="Yes"/>
+  <Project Name="FunctionParameter" Path="FunctionParameter/FunctionParameter.project" Active="No"/>
+  <Project Name="FunctionDefaultParameter" Path="FunctionDefaultParameter/FunctionDefaultParameter.project" Active="No"/>
+  <Project Name="FunctionOverloading" Path="FunctionOverloading/FunctionOverloading.project" Active="No"/>
+  <Project Name="FunctionArray" Path="FunctionArray/FunctionArray.project" Active="No"/>
+  <Project Name="FunctionPassByReference" Path="FunctionPassByValue/FunctionPassByValue.project" Active="No"/>
+  <Project Name="FunctionScopeRule" Path="FunctionScopeRule/FunctionScopeRule.project" Active="No"/>
+  <Project Name="FunctionInline" Path="FunctionInline/FunctionInline.project" Active="No"/>
+  <Project Name="FunctionRecursion" Path="FunctionRecursion/FunctionRecursion.project" Active="No"/>
+  <Project Name="Section11_Challenge" Path="Section11_Challenge/Section11_Challenge.project" Active="No"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="Function_eg" ConfigName="Debug"/>
+      <Project Name="FunctionParameter" ConfigName="Debug"/>
+      <Project Name="FunctionDefaultParameter" ConfigName="Debug"/>
+      <Project Name="FunctionOverloading" ConfigName="Debug"/>
+      <Project Name="FunctionArray" ConfigName="Debug"/>
+      <Project Name="FunctionPassByReference" ConfigName="Debug"/>
+      <Project Name="FunctionScopeRule" ConfigName="Debug"/>
+      <Project Name="FunctionInline" ConfigName="Debug"/>
+      <Project Name="FunctionRecursion" ConfigName="Debug"/>
+      <Project Name="Section11_Challenge" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Environment/>
+      <Project Name="Function_eg" ConfigName="Release"/>
+      <Project Name="FunctionParameter" ConfigName="Release"/>
+      <Project Name="FunctionDefaultParameter" ConfigName="Release"/>
+      <Project Name="FunctionOverloading" ConfigName="Release"/>
+      <Project Name="FunctionArray" ConfigName="Release"/>
+      <Project Name="FunctionPassByReference" ConfigName="Release"/>
+      <Project Name="FunctionScopeRule" ConfigName="Release"/>
+      <Project Name="FunctionInline" ConfigName="Release"/>
+      <Project Name="FunctionRecursion" ConfigName="Release"/>
+      <Project Name="Section11_Challenge" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

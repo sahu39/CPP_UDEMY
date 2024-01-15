@@ -1,0 +1,1104 @@
+															C++ constructor destructor:
+															---------------------------
+when C++ sees } or delete it call its recently called object destructor.
+
+e.g:
+----
+
+   {
+        Player Hero;
+        Player Jim("Jim");
+        Player evil("Evil",28,100);
+    }
+
+after }
+1st destructor for evil is called
+2nd destructor for Jim is called
+3rd destructor for Evil is called
+
+op:
+---
+No-args constructors
+one-arg constructors
+Three-arg constructors
+Destructor called for:Evil
+Destructor called for:Jim
+Destructor called for:
+
+e.g2:
+---------
+   Player *Friend = new Player("Friend",23,120);
+    delete Friend;
+
+op:
+---
+Three-arg constructors
+Destructor called for:Friend
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+															Constructor initialized list:
+															------------------------------
+Player::Player(): name{"none"}, xp{0}, health{0}{
+    cout << "No arg constructor is called" << endl;
+}
+Player::Player(string nam):name{nam},xp{0},health{0}{
+    cout << "one arg constructor is called" << endl;
+}
+Player::Player(string nm,int exp_val,int health_val):name{nm},xp{exp_val},health{health_val}{
+    cout << "Three arg constructor is called" << endl;
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+																Delegating Construcor:
+																-----------------------
+Player::Player()
+    :Player{"none",0,0}{
+    cout << "no-args constructor is called" << endl;
+}
+Player::Player(string nam)
+    :Player{nam,0,0}{
+    cout << "one arg constructor is called" << endl;
+}
+Player::Player(string nam,int exp_val,int health_val)
+    :name{nam},xp{exp_val},health{health_val}{
+    cout << "three args constructor is called" << endl;
+}
+
+
+The three arg constructor should be written as Constructor initialized list so that one arg and no arg constructor can be delegated from 3 args constructor
+
+e.g:
+----------
+
+Player player1;
+---------------
+Call Flow:
+-------------
+1st:Player::Player()
+    :Player{"none",0,0}
+		|
+		|
+		|
+2nd:Player::Player(string nam,int exp_val,int health_val)
+    :name{nam},xp{exp_val},health{health_val}{
+    cout << "three args constructor is called" << endl;
+}
+		|
+		|
+		|
+3rd:   cout << "no-args constructor is called" << endl;
+}
+		|
+		|
+
+op:
+====
+three args constructor is called
+no-args constructor is called
+		
+Simillarly output for these function call is:
+
+Player player2("swagat");
+
+op:
+===
+three args constructor is called
+one arg constructor is called
+
+
+Player player3("Sunil",5,100);
+
+op:
+===
+three args constructor is called
+---------------------------------------------------------------------------------------------------------------------------------------
+												Default Constructor Parameter:
+												-----------------------------------
+
+
+class Player{
+private:
+    string name;
+    int xp;
+    int health;
+public:
+    Player(string nam="None",int xp_val=0,int health_val=0);
+    ~Player();
+};
+
+Player::Player(string nam,int xp_val,int health_val)
+    :name{nam},xp{xp_val},health{health_val}{
+        cout << "Three args constructor is called" << endl;
+}
+Player::~Player(){
+    cout << "Destructor is called for " << name << endl;
+}
+
+
+
+int main()
+{
+	Player empty;
+    Player Frank("Frank");
+    Player Villian("Villian",10,100);
+    Player Hero("Hero",20);
+	return 0;
+}
+
+
+Call flow for "Player empty":
+------------------------------
+1st-------->Player empty;
+		|
+		|
+		|
+2nd------->Player::Player(string nam,int xp_val,int health_val)
+    	   :name{nam},xp{xp_val},health{health_val}{
+        		cout << "Three args constructor is called" << endl;
+	  }
+		|
+		|
+		|
+3rd------->op:Three args constructor is called
+
+
+Call Flow for "Player Frank("Frank");":
+----------------------------------------
+1st----------->Player Frank("Frank");
+			|
+			|
+			|
+2nd----------->Player::Player(string nam,int xp_val,int health_val)
+    		:name{nam},xp{xp_val},health{health_val}{
+        		cout << "Three args constructor is called" << endl;
+		}
+			|
+			|
+			|
+3rd----------->op:Three args constructor is called
+
+
+Call Flow for "Player Villian("Villian",10,100);":
+--------------------------------------------------
+1st----------->Player Villian("Villian",10,100);
+			|
+			|
+			|
+2nd----------->Player::Player(string nam,int xp_val,int health_val)
+    		:name{nam},xp{xp_val},health{health_val}{
+        		cout << "Three args constructor is called" << endl;
+		}
+			|
+			|
+			|
+3rd----------->op:Three args constructor is called
+
+
+Call flow for "Player Hero("Hero",20);":
+------------------------------------------
+1st----------->Player Hero("Hero",20);
+			|
+			|
+			|
+2nd----------->Player::Player(string nam,int xp_val,int health_val)
+    		:name{nam},xp{xp_val},health{health_val}{
+        		cout << "Three args constructor is called" << endl;
+		}
+			|
+			|
+			|
+3rd----------->op:Three args constructor is called
+
+Destructor Call Flow:
+---------------------
+Destructor is called for Hero
+Destructor is called for Villian
+Destructor is called for Frank
+Destructor is called for None
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+														Pass by reference guide:
+														-------------------------
+https://www.quantstart.com/articles/Passing-By-Reference-To-Const-in-C/
+
+Passing by Value:
+-------------------
+When an object (or built-in type) is passed by value to a function, the underlying object is copied using its copy constructor.
+The new object has additional memory allocated to it and all values and sub-objects are copied and stored separately.
+If the object passed is a built-in type such as an int or double value then the copying process is cheap and will often not impact performance.
+However if the passed object contains a lot of stored values, such as a vector or matrix then the copying process will be expensive in terms of
+both storage and CPU cycles.
+
+double euclid_norm(vector<double> my_vector);
+
+Passing by Reference:
+------------------------
+When an object (or built-in type) is passed by reference to a function, the underlying object is not copied. 
+The function is given the memory address of the object itself. This saves both memory and CPU cycles as no new memory is allocated and no (expensive) 
+copy constructors are being called. It is a much more efficient operation.
+
+
+If the function being passed the object now modifies the object in any way, the original object will reflect those modifications,
+rather than a copy of the object. In some instances this is exactly what is intended. In other situations this may not be the desired behaviour.
+
+double euclid_norm(vector<double>& my_vector);
+
+
+Passing by Reference to Const:
+-----------------------------------
+To solve the problem of not copying AND not modifying the underlying data a technique known as passing by reference to const is used.
+This is similar to passing by reference except that we mark the my_vector parameter as a const object.
+This tells euclid_norm not to modify my_vector within its own scope:
+
+double euclid_norm(const vector<double>& my_vector);
+
+
+Our interface is now much more precise about its intent. The const keyword marks my_vector as non-modifiable,
+while the reference symbol (&) states that it should not be copied. This is exactly the behaviour we would want out of a norm function.
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+															Copy Constructor syntax:
+															--------------------------
+
+class_name::class_name(const class_name &source);
+
+
+class_name is a constructor of class class_name and having parameters of object of same class as reference
+
+e.g 1:
+------
+#include <iostream>
+#include <string>
+using namespace std;
+class Player{
+private:
+    string name;
+    int xp;
+    int health;
+public:
+    Player(string nm="None",int exp_val=0, int health_val=0);
+    Player(const Player &source);
+    ~Player();
+    string get_name(){return name;}
+    int get_xp(){return xp;}
+    int get_health(){return health;}
+    
+};
+Player::Player(string nm,int exp_val,int health_val)
+    :name{nm},xp{exp_val},health{health_val}{
+        cout << "Three arg constructor is called" << endl;
+}
+Player::Player(const Player &source)
+    :name{source.name},xp{source.xp},health{source.health}{
+        cout << "copy constructor is called for" << source.name << endl;
+}
+Player::~Player(){
+    cout << "Destructor is called for:" << name << endl; 
+}
+void do_a_copy(Player p1){
+    cout << "p1.name:" << p1.get_name() <<endl;
+    cout << "p1.xp:" << p1.get_xp() << endl;
+    cout << "p1.health:" << p1.get_health() << endl;
+}
+
+int main()
+{
+	Player empty;
+    do_a_copy(empty);
+    //Player player_object
+    return 0;
+}
+
+
+
+Flow of     do_a_copy(empty);:
+---------------------------------
+1st:do_a_copy(empty);
+			|
+			|
+2nd:Player::Player(const Player &source)
+    :name{source.name},xp{source.xp},health{source.health}{
+			|
+			|
+3rd:cout << "copy constructor is called for" << source.name << endl;
+}
+			|
+			|
+3rd:void do_a_copy(Player p1){
+    cout << "p1.name:" << p1.get_name() <<endl;
+			|
+			|
+4th:cout << "p1.xp:" << p1.get_xp() << endl;
+			|
+			|
+5th:cout << "p1.health:" << p1.get_health() << endl;
+}
+
+
+
+op:
+-------
+Three arg constructor is called
+copy constructor is called for None
+p1.name:None
+p1.xp:0
+p1.health:0
+Destructor is called for:None
+Destructor is called for:None
+
+--------------------------------------------------------------
+
+e.g:2:
+-------
+#include <iostream>
+#include <string>
+using namespace std;
+class Player{
+private:
+    string name;
+    int xp;
+    int health;
+public:
+    Player(string nm="None",int exp_val=0, int health_val=0);
+    Player(const Player &source);
+    ~Player();
+    string get_name(){return name;}
+    int get_xp(){return xp;}
+    int get_health(){return health;}
+    
+};
+Player::Player(string nm,int exp_val,int health_val)
+    :name{nm},xp{exp_val},health{health_val}{
+        cout << "Three arg constructor is called" << endl;
+}
+Player::Player(const Player &source)
+    //:name{source.name},xp{source.xp},health{source.health}{
+      :Player{source.name,source.xp,source.health}{
+        cout << "copy constructor is called for" << source.name << endl;
+}
+Player::~Player(){
+    cout << "Destructor is called for:" << name << endl; 
+}
+void do_a_copy(Player p1){
+    cout << "p1.name:" << p1.get_name() <<endl;
+    cout << "p1.xp:" << p1.get_xp() << endl;
+    cout << "p1.health:" << p1.get_health() << endl;
+}
+
+int main()
+{
+	Player empty{"XXXXX",10,100};
+    Player new_object {empty};
+    do_a_copy(empty);
+    //Player player_object
+    return 0;
+}
+
+Call Flow for "Player new_object {empty};":
+----------------------------------------------
+1st:Player new_object {empty};
+			|
+			|
+			|
+2nd:Player::Player(const Player &source)
+    //:name{source.name},xp{source.xp},health{source.health}{
+      :Player{source.name,source.xp,source.health}{
+			|
+			|
+			|
+3rd:Player::Player(string nm,int exp_val,int health_val)
+    :name{nm},xp{exp_val},health{health_val}{
+        cout << "Three arg constructor is called" << endl;
+	}
+			|
+			|
+			|
+4th:    cout << "copy constructor is called for:" << source.name << endl;
+	}
+
+
+
+Call Flow for "do_a_copy(empty);":
+----------------------------------------------
+1st:do_a_copy(empty);
+			|
+			|
+			|
+2nd:Player::Player(const Player &source)
+    //:name{source.name},xp{source.xp},health{source.health}{
+      :Player{source.name,source.xp,source.health}{
+			|
+			|
+			|
+3rd:Player::Player(string nm,int exp_val,int health_val)
+    :name{nm},xp{exp_val},health{health_val}{
+        cout << "Three arg constructor is called" << endl;
+	}
+			|
+			|
+			|
+4th:    cout << "copy constructor is called for:" << source.name << endl;
+	}
+			|
+			|
+5th:void do_a_copy(Player p1){
+    cout << "p1.name:" << p1.get_name() <<endl;
+    cout << "p1.xp:" << p1.get_xp() << endl;
+    cout << "p1.health:" << p1.get_health() << endl;
+}
+			|
+			|
+6th:Player::~Player(){---------------------------------------------->Destructor is called for "p1".
+    cout << "Destructor is called for:" << name << endl; 
+}
+			|
+			|
+			|
+7th:Player::~Player(){---------------------------------------------->Destructor is called for "new_object".
+    cout << "Destructor is called for:" << name << endl; 
+}
+			|
+			|
+			|
+8th:Player::~Player(){---------------------------------------------->Destructor is called for "empty".
+    cout << "Destructor is called for:" << name << endl; 
+}
+
+
+
+op:
+---
+Three arg constructor is called
+Three arg constructor is called
+copy constructor is called for:XXXXX
+Three arg constructor is called
+copy constructor is called for:XXXXX
+p1.name:XXXXX
+p1.xp:10
+p1.health:100
+Destructor is called for:XXXXX
+Destructor is called for:XXXXX
+Destructor is called for:XXXXX
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+																		Shallowcopy:
+                                                                      ---------------
+-Shallow copy is the default behaviour of copy constructor.
+-Memberwise copy.
+-Each data member is copied from the source object.
+-The pointer is copied not what it points to.(Shallow copy)
+
+problem:When we release the storage in the destructor, the other object still refers to the released storage.
+-------
+So once the object member is released  by the destructor. Again when the same destructor is getting called and tried to release the same member during
+that time problem occurs.
+
+Check project 11_ShallowCopy
+
+e.g:
+----
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Shallow{
+private:
+    int *data;
+public:
+    void set_data_value(int val){*data = val;}
+    int get_data_value(){return *data;}
+    Shallow(int d);
+    Shallow(const Shallow &source);
+    ~Shallow();
+};
+
+Shallow::Shallow(int d){
+    data = new int;
+    *data = d;
+}
+
+Shallow::Shallow(const Shallow &source)
+    :data(source.data){                  /////Shallow copy(Only the pointer is copied not what it is pointing to)
+    cout << "copy constructor :shallow" << endl;
+}
+
+Shallow::~Shallow(){
+    delete data;
+    cout <<"Destructor Freeing Data" << endl;
+}
+void display_shallow(Shallow s1){
+    cout << s1.get_data_value() << endl;
+}
+int main(){
+    Shallow obj1 {100};
+    display_shallow(obj1);
+    //After display_shallow obj1's data  is released as destructor got called
+    Shallow obj2 {obj1};
+    obj2.set_data_value(1000);
+    
+    return 0;
+}
+
+Call flow of "display_shallow(obj1);":
+------------------------------------------
+1st:display_shallow(obj1);
+			|
+			|
+			|
+2nd:Shallow::Shallow(const Shallow &source)
+    :data(source.data){                  /////Shallow copy//Problem: Source and the newly created object both point to the same "data"
+    cout << "copy constructor :shallow" << endl;
+	}
+			|
+			|
+			|
+3rd:void display_shallow(Shallow s1){//s1 is the copy of obj1 so when scope of display_shallow() ends the destructor for s1 will be getting called.
+    cout << s1.get_data_value() << endl;
+	}
+			|
+			|
+			|
+4th:Shallow::~Shallow(){-------------------------------------------Destructor for s1(copy of obj1) is called when display_shallow function scope ends.
+    delete data;---------------------------------------------------As s1.data contains only address pointed by obj1.data due to shallow copy so that address got released
+    cout <<"Destructor Freeing Data" << endl;
+}
+			|
+			|
+			|
+Problem: //After display_shallow obj1's data  is released as destructor got called.
+			As s1.data and obj1.data points to same location at this point when "delete data" is getting called releases the "s1.data" as well as
+			"obj1.data"
+
+Call flow of "Shallow obj2 {obj1};":
+--------------------------------------
+1st:Shallow obj2 {obj1};
+			|
+			|
+			|
+2nd:Shallow::Shallow(const Shallow &source)
+    :data(source.data){                  /////Shallow copy
+    cout << "copy constructor :shallow" << endl;
+}
+			|
+			|
+			|
+3rd:Shallow::~Shallow(){
+    delete data;
+    cout <<"Destructor Freeing Data" << endl;
+}
+			|
+			|
+			|
+	When Destructor is getting called for obj2, as obj2.data is shallow copied the obj1.data and obj1.data has already been destroyed by previous 
+	destructor call so in this destructor call it will get a SIGTRAP signal as "delete data" statement again try to release already released "data"
+	from previous destructor call. This is the real problem of shallow copy.
+
+
+problem:
+-----------
+-Each member is copied from the source to destination
+
+-the pointer is copied not what it points to
+
+-so when we release the storage in the destructor, the other object stil refers to released storage.
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+																Deep Copy:
+																-----------
+Deep copy pointer is copied
+
+-Create a copy of the data pointed by the member pointer.
+-Each copy will have pointer to unique storage in the heap.
+-Do a deep copy when there is a raw-pointer present as a class data member.
+
+
+Create new storage and copy values
+
+e.g:
+------
+#include <iostream>
+using namespace std;
+
+class Deep{
+private:
+    int *data;
+public:
+    void set_data_value(int val){*data = val;}
+    int get_data_value(){return *data;}
+    Deep(int);
+    Deep(const Deep &);
+    ~Deep();
+};
+Deep::Deep(int d){
+    data = new int;
+    *data = d;
+}
+/*
+Deep::Deep(const Deep &source){
+    data =  new int;
+    *data = *source.data;//Data pointed by source's data pointer
+    cout << "copy constructor is getting called" << endl;
+}*/
+
+//We can use delegating of the Deep constructor in copy constructor
+Deep::Deep(const Deep &source)
+  :Deep(*source.data){         //Delegating Constructor
+    cout << "copy constructor is getting called" << endl;
+}
+Deep::~Deep(){
+    delete data;
+    cout << "Destructor destroying pointer" << endl;
+}
+
+void display_deep(Deep p){
+    cout << p.get_data_value() << endl;
+}
+int main()
+{
+	Deep obj1 {100};
+    display_deep(obj1);
+    
+    Deep obj2 {obj1};
+    obj2.set_data_value(1000);
+    
+	return 0;
+}
+
+call flow of "display_deep(obj1);":
+------------------------------------
+1st:display_deep(obj1);//obj1.data = 0x1a15f0---->*obj1.data = 100
+			|
+			|
+			|
+2nd:Deep::Deep(const Deep &source)       &source.data = 0x1a15f0 ----> *source.data = 100
+  :Deep(*source.data){         //Delegating Constructor
+			|
+			|
+			|
+3rd:Deep::Deep(int d){-------------------//So when this is getting invoked by "Deep(*source.data)" new pointer is created in heap with different address
+										 //which is different from obj1.data address which was same when doing shallow copy method.	
+    data = new int;                      //data = 0x1a1630---->*data = 100
+    *data = d;
+	}
+			|
+			|
+			|
+4th:cout << "copy constructor is getting called" << endl;
+	}
+			|
+			|
+			|
+5th:void display_deep(Deep p){--------------//p.data = 0x1a1630-------->*p.data = 100
+    cout << p.get_data_value() << endl;
+	}
+			|
+			|
+			|
+6th:Deep::~Deep(){---------------------//Releasing  p.data which does not release obj1.data//p.data = 0x1a1630-------->*p.data = 100
+    delete data;
+    cout << "Destructor destroying pointer" << endl;
+	}
+
+
+
+Call Flow of "Deep obj2 {obj1};":
+------------------------------------
+1st:Deep obj2 {obj1};//obj1.data = 0x1a15f0---->*obj1.data = 100 //obj2.data = 0x1a1630------->*obj2.data = 100
+				|
+				|
+				|
+2nd:Deep::Deep(const Deep &source)  //&source.data = 0x1a15f0 ----> *source.data = 100
+  :Deep(*source.data){         //Delegating Constructor
+				|
+				|
+				|
+3rd:
+    cout << "copy constructor is getting called" << endl;
+	}
+				|
+				|
+				|
+4th:Deep::Deep(int d){			////data = 0x1a1630---->*data = 100
+    data = new int;
+    *data = d;
+	}
+				|
+				|
+				|
+5th:Deep::~Deep(){     //////data = 0x1a1630----destroyed
+    delete data;
+    cout << "Destructor destroying pointer" << endl;
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+														l-value,r-value example:
+														---------------------------
+l-value reference:
+-------------------
+
+int &l_ref =  x; //l-value reference is l_ref.
+l_ref =  10;     //change x to 10
+
+int x {100}; //x is an l-value
+void func(int &num);//num is l-value reference
+func(x);//This is ok as x is a l-value and assigned to l-value reference.
+func(200);//This will give a compilation error as 200 is a r-value.
+
+error:cannot bind non-const lvalue reference of type 'int&' of type 'int&' to an rvalue of type 'int'
+
+r-value reference:
+------------------
+int &&r_ref = 100;//r-value refernce is r_ref;
+r_ref = 300;	  //change r_ref to 300
+
+int &&x_ref = x;//compiler error
+
+int x {100}; //x is an l-value
+void func(int &&num);//num is r-value reference
+func(x);//This will give a compilation error as x is a l-value.
+func(200);//This is ok as 200 is a r-value and assigned to r-value reference.
+
+error : cannot bind rvalue reference of type 'int &&' to lvalue of type 'int'
+
+#include <iostream>
+void lfunc(int &num);
+void rfunc(int &&num);
+int main()
+{
+	std::cout << "My Template" << std::endl;
+    int x = 10;
+    lfunc(x);
+	//lfunc(100);//error ;  cannot bind non-const lvalue reference of type 'int&' of type 'int&' to an rvalue of type 'int'
+    rfunc(200);
+   // rfunc(x);//error : cannot bind rvalue reference of type 'int &&' to lvalue of type 'int'
+	return 0;
+}
+void lfunc(int &num){
+    std::cout<<"L-value e.g:" << num << std::endl;
+}
+void rfunc(int &&num){
+    std::cout << "R-value e.g:"<< num << std::endl;
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+																Move constructor:
+																-------------------
+copy elision:
+-------------
+-Compiler optimization technique that eliminates unnecessary copies.
+-RVO(Return Value Optimization):
+-r-value reference operator is &&.
+
+e.g:
+-----
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+class Move{
+private:
+    int *data;
+public:
+    void set_data_value(int val){*data = val;}
+    int get_data_value(){return *data;};
+    Move(int); //constructor
+    Move(const Move &source); //copy constructor
+    Move(Move &&source);
+    ~Move(); //Destructor
+    
+};
+Move::Move(int d){
+    data = new int;
+    *data = d;
+    cout << "Constructor for:" << d << endl;
+}
+
+Move::Move(const Move &source)
+    :Move(*source.data){
+        cout << "Copy constructor:Deep copy for:" << *data << endl;
+}
+Move::Move(Move &&source)
+    :data(source.data){
+    source.data = nullptr;
+    cout << "Move constructor-moving resource:" << *data << endl;
+}
+Move::~Move(){
+    if(data != nullptr)
+        cout << "Destructor freeing data for:" << *data << endl;
+    else
+        cout << "Destructor freeing data for nullptr" << endl;
+    delete data;
+}
+int main()
+{
+    vector<Move> vec;
+    vec.push_back(Move{10});
+    
+    vec.push_back(Move{20});
+    vec.push_back(Move{30});
+    vec.push_back(Move{40});
+    vec.push_back(Move{50});
+    vec.push_back(Move{60});
+    vec.push_back(Move{70});
+    vec.push_back(Move{80});
+	
+	return 0;
+}
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+																	this:
+																	-----
+pointer to an object currently being used by class member method.
+
+this keyword is used with in the scope of the class.
+
+contains the address of the object.
+
+used with in the scope of the class.
+
+All member access is done by this keyword.
+
+void Account :: set_balance(double balance){
+	this->balance = balance;
+}
+
+
+Player::Player(std::string name,int xp,int health){
+    this->name =  name;
+    this->xp = xp;
+    this->health = health;
+};
+--------------------------------------------------------------------------------------------------------------------------------------------------
+													Using const with class:
+													--------------------------
+const Player villian {"villian", 100, 50};
+
+void display_player_name(const player &p){
+	cout << p.get_name() << endl;
+	
+}
+
+display_player_name(villian);// Compiler error
+
+As villian is a constant object compiler complains that you are passing a const object as this to a method that  
+could change it. The compiler assumes that get_name() object pottentially can change that object. That is why
+it will through the compilation error.
+
+solution:
+---------------
+we should tell the compiler that specific will not modify the object.
+
+class Player{
+	private:
+		.....
+	public:
+		std::string get_name() const;
+		.....
+};
+
+
+
+const Player villian {"villian", 100, 50};
+
+villian.set_name("super villian");   //Error as  set_name() is not created with const keyword as get_name();
+
+std::cout<<villian.get_name()<<std::endl; //OK as get_name() is now created with const keyword.
+
+e.g:
+--------
+#include <iostream>
+#include <string>
+class Player{
+private:
+    std::string name;
+    int xp;
+    int health;
+public:
+    std::string get_name() const{
+        return name;
+    }
+    void set_name(std::string name){
+        this->name = name;
+    }
+    //Overloading Constructor
+    Player();
+    Player(std::string name,int xp,int health);
+    Player(const Player &p);
+};
+Player::Player(){
+    std::cout << "no-arg constructor" << std::endl;
+}
+Player::Player(std::string name,int xp,int health){
+    this->name =  name;
+    this->xp = xp;
+    this->health = health;
+};
+Player::Player(const Player &p){
+    std::cout << "copy constructor" << std::endl;
+}
+void display_player(const Player &p){
+    std::cout << p.get_name() << std::endl;
+}
+int main()
+{
+    const Player villian {"villian",0,100};
+    Player Hero {"Hero",100,100};
+    display_player(villian);
+    
+	std::cout << "My Template" << std::endl;
+	return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+															static class member:
+															--------------------
+-We can have both static data and function members.
+-Static data members belongs to the class not to the objects.
+-Useful to store class wide information.
+
+e.g:
+------
+Suppose we want to know how many player objects are active in our application.
+This can be done by creating a global variable but it is difficult to trace as we don't know how many constructors
+and destructors are getting called.
+
+Better solution is to create a static variable which is part of a player class and then we can manipulate the
+variable directly with in the player class. Then we can simply ask the player class what are the no. of players.
+We don't need any help from objects to tell the no. of player objects.
+
+data member who is declared as static can only be called by static method.
+
+class Player{
+	private:
+		static int num_players;
+	public:
+		static int get_name_players();
+		...
+		...
+};
+
+Check the 16_Static_DataMember to know about the static data member information.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+																	class Vs Struct:
+																	------------------
+-Members of struct are public by default but Members of class are private by default.
+
+e.g:
+----
+class Person{
+	std::string name;
+	std::string get_name();
+};
+
+Person p;
+p.name = "Frank";//Compiler Error - Private
+std::cout<<p.get_name();//Compiler Error - Private
+
+
+struct Person{
+	std::string name;
+	std::string get_name();
+};
+
+Person p;
+p.name = "Frank";//OK - Public
+std::cout<<p.get_name();//OK - Public
+
+
+General Guidelines to use struct and class:
+---------------------------------------------
+struct:
+--------
+-Use struct with passive objects with public access.
+-Don't declare methods in struct.
+Class:
+------
+-Use class for active objects with private access.
+-Imlement getters and setters as needed.
+-Implement member metohod as needed.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+													Friend of a class
+													------------------
+Friend:
+-------
+-A function or class that has access to private class member.
+-And, that function or class not a member of class it is accessing.
+
+Function:
+---------
+-can be regular non-member function.
+-can be method of another class.
+
+Class:
+------
+-Another class have access to private members.
+
+e.g:
+----
+non-member function:
+-------------------
+class Player{
+	friend void display_player(Player &p);
+	std::string name;
+	int health;
+	int xp;
+public:
+	........
+	......
+};
+
+void display_player(Player &p)
+{
+	std::cout << p.name << std::endl;
+	std::cout << p.health << std::endl;
+	std::cout << p.xp << std::endl;
+	
+}
+
+member function of another class:
+----------------------------------
+class Player{
+	friend void Other_class::display_player(Player &p);
+	std::string name;
+	int health;
+	int xp;
+public:
+	........
+	......
+};
+
+class Other_class{
+	....
+public:
+	void display_player(Player &p)
+	{
+		std::cout << p.name << std::endl;
+		std::cout << p.health << std::endl;
+		std::cout << p.xp << std::endl;
+	}
+};
+
+Another class as a friend:
+--------------------------
+class Player{
+	friend class Other_class;
+	std::string name;
+	int health;
+	int xp;
+public:
+	........
+	......
+};
+
+
