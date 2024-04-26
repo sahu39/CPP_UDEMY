@@ -11,6 +11,7 @@ public:
     Mystring(const Mystring &source); //Copy Constructor
     ~Mystring();                      //Destructor
     
+    Mystring &operator=(const Mystring &rhs); //Copy Assisgnment
     void display() const;
     int get_length() const;
     const char *get_str() const;

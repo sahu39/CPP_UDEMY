@@ -8,6 +8,7 @@ Mystring::Mystring()
         *str = '\0';
 }
 
+//overloaded Constructor
 Mystring::Mystring(const char *source)
     :str(nullptr){
         if(source == nullptr)
@@ -27,7 +28,18 @@ Mystring::Mystring(const Mystring &source)
         str = new char[std::strlen(source.str)+1];
         std::strcpy(str,source.str);
 }
-
+//Copy Assignment
+Mystring &Mystring::operator =(const Mystring &rhs)
+{
+    if(this == &rhs)
+    {
+        return *this;
+    }
+    delete[] this->str;
+    str = new char[std::strlen(rhs.str) + 1];
+    std::strcpy(this->str,rhs.str);
+    return *this;
+}
 Mystring::~Mystring()
 {
     delete[]str;
