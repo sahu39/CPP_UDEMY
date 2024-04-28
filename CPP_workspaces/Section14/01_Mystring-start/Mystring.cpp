@@ -31,6 +31,7 @@ Mystring::Mystring(const Mystring &source)
 //Copy Assignment
 Mystring &Mystring::operator =(const Mystring &rhs)
 {
+    std::cout << "Copy Assignment Operator" << std::endl;
     if(this == &rhs)
     {
         return *this;
