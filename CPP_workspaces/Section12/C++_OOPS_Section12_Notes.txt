@@ -1,0 +1,50 @@
+Pointers and pointers pitfalls:
+=================================
+1. Uninitialized Pointers.
+2. Dangling Pointers
+3. Not checking if new failed to allocate memory?
+4. Leaking Memory.
+
+
+1. Uninitialized Pointers:
+=============================
+int *ptr; //Pointing Anywhere means contains garbage
+...
+...
+...
+*ptr = 100; //Might cause Crash
+
+
+2. Dangling Pointers:
+=========================
+-Pointers Pointing to released memory.
+------------------------------------------
+	- 2 pointers points to same dats.
+	- 1 pointer releases the data with delete.
+	- The other pointer accesses the released data.
+	
+-Pointers points to memory that is invalid:
+------------------------------------------------
+	- When we return a pointer to function local variable.
+	
+	
+3. Not checking if new failed to allocate memory?
+======================================================
+-If new fails exception is thrown.
+-we can use exception handling to catch the exception.
+-Dereferncing a NULL pointer will cause your program to crash.
+
+
+4. Leaking Memory.:
+=======================
+-Forgetting deallocate the memory which is allocated in the heap using new.
+-if you lose the pointer to the storage allocated on the heap you have not way to get to that storage again.
+-The memory is leaked.
+-one of the most common pointer problems.
+
+
+
+
+
+
+
