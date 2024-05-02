@@ -144,6 +144,85 @@ Remember that these are guidelines, and there may be exceptions based on specifi
 
 
 
+==========================================================================================================================================================
+													l-values and r-values:
+													=====================
+l-values:
+===========
+-that have names and addressable.
+-modifiable if they are not contsants.
+-We can Use them at the left hand side of assignment operator.
+
+e.g:
+========
+int x {100}; // x is and l-value.
+x = 1000;
+x =  1000+200;
+
+string name;// name is an l-value.
+name = "Frank";
+
+
+r-values:
+============
+-non-addressable and non assignable;
+-value that is not a l-value.
+-on the right hand side of an assignment operation.
+-a temporary which is indented to be non modifiable.
+-a lliteral.
+-r-value can be assigned to l-value explicitly.
+
+int x{100};  //100 is a r-value;
+int y = x+200; //x+200 is a r-value
+
+string name;
+name = "Frank"; //Frank is a r-value
+
+int max_num = max(20,30); //max(20,30) is an r-value
+
+=================================================================================================================================================================
+													l-value reference and r-value reference
+													========================================
+In C++, references can be categorized into two main types: l-value references and r-value references. 
+These references have different behaviors and are used in different contexts.
+
+1. L-value Reference (&):
+---------------------------
+-An l-value reference binds to an l-value, which is essentially an object that has a name and is accessible in memory.
+-L-value references are declared using the & symbol.
+-They extend the lifetime of the object they bind to.
+-They cannot bind to temporary objects or literals.
+-They are commonly used for passing parameters to functions by reference, allowing the function to modify the original object.
+Example:
+========
+int x = 10;
+int& ref = x; // L-value reference
+ref = 100;    // ok
+
+int &ref1 = 100; //not ok or error
+
+ passing parameters to functions by reference:
+ -------------------------------------------------
+ int square(int &num)
+ {
+	return n*n;
+ }
+ 
+ 
+ int num{10};
+ 
+ square(num) //OK as l-value is given
+ 
+ square(10)  //Not OK or error as literal or r-value is given.
+ 
+ 
+
+
+
+
+
+
+
 
 
 
