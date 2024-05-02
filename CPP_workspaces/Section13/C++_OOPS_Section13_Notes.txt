@@ -1101,4 +1101,129 @@ public:
 	......
 };
 
+===================================================================================================================================================
+															Move Constructor in c++
+															==========================
+															
+-Thumbrule if you can refer to an object by name and if you can folllow an object by pointer then that object is addressable and it is L-value and R-value
+ is everything else.
+ 
+-Sometime when we execute code the compiler creates unnamed temporary values.
+	int total {0};
+	total = 100 + 200;
+-100 + 200  is calculated and stored in unnamed temp value.
+-the 300 is then stored in total.
+-then the temp value is discarded.
+
+-The same happens with object as well.
+-If copy constructor is getting called over and over and over again overheads increases.
+-If there is raw-pointer then the overheads for deep copy is greater.
+-Move Semantics address r-value objects.
+-Copy constructor is getting called whenever an object try to create a copy of an object.
+-If a class contains a raw-pointer then we must implement deep copy. However it is computationally expensive since we allocate space during copy and
+ then copy the data over.
+-C++ move constructor moves the object rather then copy which is extremely efficient.
+-Optional but recommended when you use raw-pointer.
+-Copy elision-Compiler eliminates unnecessary copies.
+-RVO-Return value optimization. compiler create a code that does not require to returning to a value.
+
+r-value refernce:
+===================
+int x{100};
+int &l_ref = x; //l-value reference
+l_ref = 10;     //x is changed to 10
+
+int &&r_ref = 200; //r-value reference
+r_ref = 300;       //change r_ref to 300
+
+int &&r_ref = x;   //Compilation error
+
+
+
+int x {100};
+int func(int &num); //num l-value refernce
+func(x);             //correct
+func(100);           //incorrect
+
+
+int func2(int &&num) //num r-value reference requires r-value to pass.
+func(x);             //incorrect
+func(200);           //correct
+
+
+What does move constructor do:
+================================
+-Moves the resource.
+-Simply copies the address of the resorce from source to the current object and nulls out the pointer in the source pointer.
+-Very efficeient.
+
+syntax:
+=============
+				Type::Type(Type &&Source)
+
+e.g:
+=======
+					Player::Player(Player &&Source);
+					Move::Move(Move &&Source);
+					
+Move::Move(Move &&source)
+	: data(source.data)
+{
+		source.data = nullptr; //'Steal' the data then null out the Source raw-pointer.
+}
+
+    vector<Move> vec;
+    vec.push_back(Move{10});
+
+Flow for "vec.push_back(Move{10})"
+======================================
+1st:vec.push_back(Move{10})
+			|
+			|
+			|
+2nd:Move::Move(int d){----------------------d = 10, this = 0x70fdd0,
+    data = new int;
+    *data = d;------------------------------data = 0xb31610, *data = 10
+    cout << "Constructor for:" << d << endl;-------------------Constructor for:10
+	}
+			|
+			|
+			|
+			|
+3rd:Move::Move(Move &&source)------------------@0x70fdd0:{data = 0xb31610},source.data = 0xb31610
+    //:data(source.data){
+{
+    data = source.data;----------------------------this.data = 0xb31610
+    source.data = nullptr;---------------------------source.data = 0x0
+    cout << "Move constructor-moving resource:" << *data << endl;----Move constructor-moving resource:10
+}
+			|
+			|
+			|
+			|
+4th:Move::~Move(){---------------------------------Destroying R-value refrence source
+    if(data != nullptr)
+        cout << "Destructor freeing data for:" << *data << endl;
+    else
+        cout << "Destructor freeing data for nullptr" << endl;------------------------------Destructor freeing data for nullptr
+    delete data;
+}
+
+ 	
+					
+op:
+=====
+Constructor for:10
+Move constructor-moving resource:10
+Destructor freeing data for nullptr
+
+
+
+
+
+
+
+
+
+
 
