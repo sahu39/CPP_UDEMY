@@ -74,7 +74,7 @@ S2 = S1 //This will assign S2 to S1
 S2.operator=(S1) //operator= method is called.
 
 
-Overlodaed assignment operator Function:
+Overloaded assignment operator Function:
 =========================================
 Mystring &Mystring::Operator=(const Mystring &rhs)
 {
@@ -86,7 +86,182 @@ Mystring &Mystring::Operator=(const Mystring &rhs)
 	str = new char[std::strlen(rhs.str) + 1];     //Assign the heap memory of length equals to rhs member str length.
 	std::strcpy(str,rhs.str);					  //Perform  the copy.
 	return *this;
-}					
+}	
+
+
+Overloading the '=' Move assignment operator(move semantics or stealing):
+==========================================================================	
+-This operator overloading works with r-value reference(&&)	and move semantics.
+-If we have raw pointer we should overload the move assignment operator for the efficiency.
+
+e.g:
+=====
+			Mystring S1;
+			s1 = Mystring {"Frank"}; //"Frank" is a r-value so move assignment overloading can be used here or if move assignment overloading is not
+                                        there then copy assignment overloading will be used by default.
+										
+										
+										
+										
+Syntax:
+=========
+			Type &Type::operator=(Type &&rhs);
+			
+			
+			Mystring &Mystring::operator = (Mystring &&rhs)
+			{
+				---
+				---
+			}
+			
+			s1 = Mystring("Joe");//move operator= is getting called.
+			s1 = "Frank";		 //move operator= is getting called.
+			
+			
+
+Overloaded assignment operator Function:(Move assignment operator):
+=====================================================================
+				Mystring &Mystring::operator = (Mystring &&rhs)
+				{
+					if(this == &rhs)	//Self-assignment
+						return *this; 	//return current object
+					
+					delete []str;		//dellocate current storage
+					str = rhs.str;		//steal the pointer
+					
+					rhs.str = nullptr;  //null out the rhs object
+					return *this;		//return current object
+				}
+			
+			
+			
+Call Flow for "Mystring a{"Hello"};" without Move assignment operator:
+===========================================================================
+						Mystring a{"Hello"};
+									|
+									|
+									|
+									|
+									|
+						//overloaded Constructor
+					1st:Mystring::Mystring(const char *source)---------source = 0x4a5020--> "Hello"
+							:str(nullptr){
+								--------
+								--------
+								----------
+								----------
+								else
+								{
+									str = new char[std::strlen(source)+1];
+									std::strcpy(str,source);------------str = 0xab1630--->  "Hello"
+								}
+						}
+									|
+									|
+									|
+									|
+									a--->str = 0xab1630--->  "Hello"
+						
+Call flow for  "a = Mystring{"Holla"}; ":
+============================================
+				 a = Mystring{"Holla"}; 
+								|
+								|
+								|
+								|
+								|
+								|
+			1st:Mystring::Mystring(const char *source)---------source = 0x4a5026---->"Holla"
+					:str(nullptr){
+					-----
+					------
+					------
+						else
+						{
+							str = new char[std::strlen(source)+1];
+							std::strcpy(str,source);-----------str = 0xab1670------>"Holla"
+						}
+				}	
+								|
+								|
+								|
+								|
+								|
+								|
+								|
+								|
+				//Copy Assignment
+			2nd:Mystring &Mystring::operator =(const Mystring &rhs)-----rhs =@0x71fe00:{str = 0xab1670"Holla"}
+				{
+					std::cout << "Copy Assignment Operator" << std::endl;
+					if(this == &rhs)---------------------------this = 0x71fdf8--str = 0xa1630"Hello"
+					{
+						return *this;
+					}
+					delete[] this->str;
+					str = new char[std::strlen(rhs.str) + 1];
+					std::strcpy(this->str,rhs.str);------------this = 0x71fdf8--str = 0xa1630"Holla"
+					return *this;------------------------------this = 0x71fdf8
+				}
+								|
+								|
+								|
+								|
+								|
+								a--->str = 0xa1630"Holla"
+								
+								
+Call Flow for "a = "Bonjur"; " without move assignment operator:
+=================================================================
+					a = "Bonjur"; -----------a---str = 0xa1630"Holla"
+						|
+						|
+						|
+					Mystring::Mystring(const char *source)-----------source = 0x4a502c"Bonjur"
+						:str(nullptr){-------------------------------this = 0x71fe08,this.str = 0x0
+							if(source == nullptr)
+							{
+								str = new char[1];
+								*str = '\0';
+							}
+							else
+							{
+								str = new char[std::strlen(source)+1];
+								std::strcpy(str,source);--------------this = 0x71fe08, this.str = 0xa1670"Bonjur"
+							}
+					}
+							|
+							|
+							|
+							|
+							|
+					Mystring &Mystring::operator =(const Mystring &rhs)-----rhs = @0x71fe08:{str = 0xa1670"Bonjur"}, this = 0x71fdf8--str = 0xa1630"Holla"
+					{
+						std::cout << "Copy Assignment Operator" << std::endl;
+						if(this == &rhs)
+						{
+							return *this;
+						}
+						delete[] this->str;------------------------------------this = 0x71fdf8---str = 0xa1630"[]\n"-->some garbage
+						str = new char[std::strlen(rhs.str) + 1];
+						std::strcpy(this->str,rhs.str);------------------------this = 0x71fdf8---str = 0xa1630"Bonjur"
+						return *this;------------------------------------------this = 0x71fdf8---str = 0xa1630"Bonjur"
+					}
+							|
+							|
+							|
+							|
+							|
+						a---->str = 0xa1630"Bonjur"	
+						
+						
+						
+					
+
+				
+			
+
+										
 						
 
 
