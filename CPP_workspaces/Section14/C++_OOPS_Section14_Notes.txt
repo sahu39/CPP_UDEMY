@@ -137,15 +137,15 @@ Overloaded assignment operator Function:(Move assignment operator):
 			
 Call Flow for "Mystring a{"Hello"};" without Move assignment operator:
 ===========================================================================
-						Mystring a{"Hello"};
+						Mystring a{"Hello"};-----------------------
 									|
 									|
 									|
 									|
 									|
 						//overloaded Constructor
-					1st:Mystring::Mystring(const char *source)---------source = 0x4a5020--> "Hello"
-							:str(nullptr){
+					1st:Mystring::Mystring(const char *source)---------source = 0x4a5020,"Hello", 
+							:str(nullptr){-----------------------------this=0x71fdf8,this.str = 0x0
 								--------
 								--------
 								----------
@@ -153,14 +153,14 @@ Call Flow for "Mystring a{"Hello"};" without Move assignment operator:
 								else
 								{
 									str = new char[std::strlen(source)+1];
-									std::strcpy(str,source);------------str = 0xab1630--->  "Hello"
+									std::strcpy(str,source);------------this.str = 0xab1630"Hello"
 								}
 						}
 									|
 									|
 									|
 									|
-									a--->str = 0xab1630--->  "Hello"
+									a--->str = 0xab1630"Hello"
 						
 Call flow for  "a = Mystring{"Holla"}; ":
 ============================================
@@ -253,6 +253,125 @@ Call Flow for "a = "Bonjur"; " without move assignment operator:
 							|
 							|
 						a---->str = 0xa1630"Bonjur"	
+						
+						
+						
+						
+------------------------------------------------------------------------------------------------------------------------------------------------
+Call Flow for "Mystring a{"Hello"};" with Move assignment operator:
+===========================================================================
+						Mystring a{"Hello"};-----------------------
+									|
+									|
+									|
+									|
+									|
+						//overloaded Constructor
+					1st:Mystring::Mystring(const char *source)---------source = 0x4a5020,"Hello", 
+							:str(nullptr){-----------------------------this=0x71fdf8,this.str = 0x0
+								--------
+								--------
+								----------
+								----------
+								else
+								{
+									str = new char[std::strlen(source)+1];------this=0x71fdf8,this.str = 0xbd1630
+									std::strcpy(str,source);--------------------this=0x71fdf8,this.str = 0xbd1630"Hello"
+								}
+						}
+									|
+									|
+									|
+									|
+									a--->str = 0xbd1630"Hello"						
+						
+Call flow for  "a = Mystring{"Holla"}; " with move assignment operator:
+==========================================================================
+								a = Mystring{"Holla"};
+												|
+												|
+												|
+												|
+												|
+								Mystring::Mystring(const char *source)-------------source=0x4a5006"Holla"
+								:str(nullptr){-------------------------------------this = 0x71fe00,this.str=0x0
+									if(source == nullptr)
+									{
+										str = new char[1];
+										*str = '\0';
+									}
+									else
+									{
+										str = new char[std::strlen(source)+1];------this = 0x71fe00,this->str = 0xbd1670
+										std::strcpy(str,source);--------------------this = 0x71fe00,this->str = 0xbd1670"Holla",source=0x4a5006"Holla"
+									}
+							}
+												|
+												|
+												|
+												|
+												|
+								Mystring & Mystring::operator=(Mystring &&rhs)----this=0x71fdf8,this->str = 0xbd1630"Hello"////rhs = @0x71fe00:{str = 0xbd1670"Holla"}
+								{
+									std::cout<<"Move Assignment Operator"<<std::endl;
+									if(this == &rhs)
+										return *this;
+									delete[] this->str;---------------------------this=0x71fdf8,this->str = 0xbd1630"`';"(Garbage value)
+									this->str = rhs.str;--------------------------this=0x71fdf8,this->str = 0xbd1670"Holla",rhs = @0x71fe00:{str = 0xbd1670"Holla"}
+									rhs.str = nullptr;----------------------------rhs = @0x71fe00:{str = 0x0}
+									return *this;---------------------------------this=0x71fdf8,this->str = 0xbd1670"Holla"
+								}
+												|
+												|
+												|
+												|
+												|
+											a---->	this=0x71fdf8,this->str = 0xbd1670"Holla"
+											
+											
+Call Flow for "a = "Bonjur"; " with move assignment operator:
+=================================================================
+								a = "Bonjur"; ---->a = this->str=0xd61670"Holla"
+										|
+										|
+										|
+										|
+										|
+						Mystring::Mystring(const char *source)-----------source=0x4a500c"Bonjur",
+							:str(nullptr){-------------------------------this = 0x71fe08, this->str = 0x0
+								if(source == nullptr)
+								{
+									str = new char[1];
+									*str = '\0';
+								}
+								else
+								{
+									str = new char[std::strlen(source)+1];--------this = 0x71fe08, this->str = 0xd61630"jsk"(garbage)
+									std::strcpy(str,source);----------------------this = 0x71fe08, this->str = 0xd61630"Bonjur",source=0x4a500c"Bonjur"
+								}
+						}
+										|
+										|
+										|
+										|
+										|
+						Mystring & Mystring::operator=(Mystring &&rhs)---------rhs=@0x71fe08:{str=0xd61630"Bonjur"}///this=0x71fdf8,this->str = 0xbd1670"Holla"
+						{
+							std::cout<<"Move Assignment Operator"<<std::endl;
+							if(this == &rhs)
+								return *this;
+							delete[] this->str;-------------------------------this=0x71fdf8,this->str = 0xbd1670"iospp"(garbage)
+							this->str = rhs.str;------------------------------this=0x71fdf8,this->str = 0xd61630"Bonjur",rhs=@0x71fe08:{str=0xd61630"Bonjur"}
+							rhs.str = nullptr;--------------------------------rhs=@0x71fe08:{str=0x0}
+							return *this;-------------------------------------this=0x71fdf8,this->str = 0xd61630"Bonjur"
+						}
+										|
+										|
+										|
+										|
+									a --> this=0x71fdf8,this->str = 0xd61630"Bonjur"
+						
+						
 						
 						
 						
