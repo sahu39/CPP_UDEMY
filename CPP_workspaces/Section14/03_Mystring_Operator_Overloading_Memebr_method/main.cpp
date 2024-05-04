@@ -19,6 +19,11 @@ int main()
     {
         std::cout << "Not Equal" << std::endl;
     }
-        
+    Mystring s3 = Larry1 + Larry2;
+    s3.display();
+    
+    Mystring s4 = mystr1 + " " + "Sahu";
+    s4.display();
+    
 	return 0;
 }

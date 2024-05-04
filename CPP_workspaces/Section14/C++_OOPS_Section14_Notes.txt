@@ -461,6 +461,34 @@ Operator'==' overloading for Mystring class:
 						if(s1 == s2)			//s1.opeartor==(s2)
 						
 						
+Opearator '+' overloading for Mystring class for concatenation:
+===============================================================
+						Mystring Mystring::operator+(const Mystring &rhs) const
+						{
+							ssize_t buff_size = std::strlen(this->str)+std::strlen(rhs.str)+1;
+							char *buff = new char[buff_size];
+							std::strcpy(buff,this->str);
+							std::strcat(buff,rhs.str);
+							
+							Mystring temp{buff};
+							delete[] buff;
+							return temp;
+						}
+						
+						
+						Mystring s1{"Sunil"};
+						Mystring s2{"Sahu"};
+						Mystring s3;
+						s3 = s1+s2;				//s1.operator(s2)
+						
+						s3.display()			//sunilsahu:9
+						
+						Mystring s4 = s1 + " " +s2;  //s1.operator+(" ").operator+(s2)
+						s4.display		
+
+						Mystring s5 = "Moe" + "stooges" //"Moe".operator+("stooges")  //ERROR
+						
+						
 
 						
 

@@ -62,7 +62,7 @@ Mystring & Mystring::operator=(Mystring &&rhs)
 //Operator- overloading for lowercase conversion
 Mystring Mystring:: operator-() const
 {
-    char *buff = new char(std::strlen(this->str)+1);
+    char *buff = new char[std::strlen(this->str)+1];
     std::strcpy(buff,this->str);
     for(size_t i=0; i<std::strlen(buff); i++)
     {
@@ -81,8 +81,18 @@ bool Mystring::operator ==(const Mystring &rhs) const
         return true;
     else
         return false;
-} 
-
+}
+ 
+Mystring Mystring::operator+(const Mystring &rhs) const
+{
+    ssize_t buff_len = std::strlen(str) + std::strlen(rhs.str) + 1;
+    char *buff = new char[buff_len];
+    std::strcpy(buff,str);
+    std::strcat(buff,rhs.str);
+    Mystring temp{buff};
+    delete[] buff;
+    return temp;
+}
 
 Mystring::~Mystring()
 {
