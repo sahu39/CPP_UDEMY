@@ -531,8 +531,94 @@ bool Money::operator==(const Money &rhs) const
 bool Money::operator!=(const Money &rhs) const
 {
     return !((this->dollars == rhs.dollars) && (this->cents == rhs.cents));
-}			
-						
+}		
+
+
+
+=======================================================================================================================================================
+												Operator Overloading as non member function or global function
+												================================================================
+Unary Opearator as global function:(++,--,-.!)
+=====================================
+Note:
+=====
+Since these are not member functions to access the private attributes of the class objects we have to implement as friends whenever we want to access
+the private members.
+
+Syntax:
+-------
+					ReturnType operator[OP](Type &obj)
+					
+					[OP] = ++,--,-,!
+					
+example:
+-----------
+					Number opeartor-(const Number &obj);
+					Number operator++(Number &obj);			//Pre-increment
+					Number operator++(Number &obj,int);		//Post-increment
+					bool opeartor!(const Number &obj);
+					
+					Number n1 {100};
+					Number n2 = -n1;						//operator-(n1)
+					n2 = ++n1;								//operator++(n1)
+					n2 = n1++;								//operator++(n1,int)
+					
+					
+Overloading unary - opeartor to make lowercase to the class char * object using non member function or global function:
+---------------------------------------------------------------------------------------------------------------------------
+This below function declared as 'friend' function in the class
+
+							Mystring opeartor-(const Mysting &obj)
+							{
+								char *buff = new char[std::strlen(obj.str)+1]
+								std::strcpy(buff,obj.str);
+								for(ssize_t i=0; i<strlen(buff); i++)
+								{
+									buff[i] = std::tolower(buff[i]);
+								}
+								Mystr temp {buff};
+								delete[] buff;
+								return temp;
+							}
+							
+							
+							
+							
+							
+							
+Binary Operators as global functions(+,-,==,!=,<,>, etc.):
+==========================================================
+Syntax:
+-------
+							ReturnType operator[OP](const Type &lhs, const Type &rhs)
+							[OP] = +,-,==,!=,<,>
+							
+							
+example:
+========
+							Number oprator+(const Number &lhs, const Number &rhs);
+							Number oprator-(const Number &lhs, const Number &rhs);
+							bool oprator==(const Number &lhs, const Number &rhs);
+							Number oprator<(const Number &lhs, const Number &rhs);
+							
+							Number n1 {100};
+							Number n2 {200};
+							Number n3;
+							n3 = n1+n2;						//operator+(n1,n2)
+							n3 = n1-n2;						//operator-(n1,n2)
+							if(n1 == n2)					//opeartor==(n1,n2)
+							
+							
+							
+Overloading binary == opeartor to check equality between 2 classes:
+====================================================================
+						bool operator==(const Mystring &lhs,const Mystring &rhs)
+						{
+							return (std::strcmp(lhs.str,rhs.str) == 0);
+						}
+							
+					
+					
 						
 
 						
