@@ -74,6 +74,7 @@ void Mystring::display() const
     std::cout <<str<<":"<<get_length()<<std::endl;
 }
 
+//lowercase
 Mystring operator-(const Mystring &obj)
 {
     char *buff = new char[std::strlen(obj.str)+1];
@@ -85,4 +86,22 @@ Mystring operator-(const Mystring &obj)
     Mystring temp {buff};
     delete [] buff;
     return temp;    
+}
+
+//equailty
+bool operator==(const Mystring &lhs,const Mystring &rhs)
+{
+    return (std::strcmp(lhs.str,rhs.str) == 0);
+}
+
+//Concatenation
+Mystring operator+(const Mystring &lhs,const Mystring &rhs)
+{
+    ssize_t buff_len = std::strlen(lhs.str) + std::strlen(rhs.str) + 1;
+    char *buff = new char[buff_len];
+    std::strcpy(buff,lhs.str);
+    std::strcat(buff,rhs.str);
+    Mystring temp {buff};
+    delete[] buff;
+    return temp;
 }

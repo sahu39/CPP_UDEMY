@@ -4,6 +4,8 @@
 class Mystring
 {
     friend Mystring operator-(const Mystring &obj);
+    friend bool operator==(const Mystring &lhs,const Mystring &rhs);
+    friend Mystring operator+(const Mystring &lhs,const Mystring &rhs);
 private:
     char *str;//Pointer to char[] which holds c-style string
 public:
