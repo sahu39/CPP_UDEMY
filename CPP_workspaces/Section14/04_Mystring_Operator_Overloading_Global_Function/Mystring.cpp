@@ -73,3 +73,16 @@ void Mystring::display() const
 {
     std::cout <<str<<":"<<get_length()<<std::endl;
 }
+
+Mystring operator-(const Mystring &obj)
+{
+    char *buff = new char[std::strlen(obj.str)+1];
+    std::strcpy(buff,obj.str);
+    for(size_t i=0; i<std::strlen(buff); i++)
+    {
+        buff[i] = std::tolower(buff[i]);
+    }
+    Mystring temp {buff};
+    delete [] buff;
+    return temp;    
+}
