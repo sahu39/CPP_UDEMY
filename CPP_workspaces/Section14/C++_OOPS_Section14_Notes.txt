@@ -489,6 +489,51 @@ Opearator '+' overloading for Mystring class for concatenation:
 						Mystring s5 = "Moe" + "stooges" //"Moe".operator+("stooges")  //ERROR
 						
 						
+						
+Operator Overloading as Member Functions Task:
+=================================================
+Given the provided Money class,  please add the overloaded equality operators == and !=
+
+These overloaded operators should return a bool and should be implemented as member functions.
+
+Given 2 Money objects, consider them to be equal if both the dollars and cents attributes are the same for both objects.
+
+First, add the overloaded operator function declarations to the Money class declaration in Money.h
+
+Second, add the overloaded operator function definitions in Money.cpp	
+
+
+Money.h:
+=============
+class Money {
+    int dollars;
+    int cents;
+public:
+    Money(int dollars, int cents); 
+    Money(int total);
+
+    //----DO NOT MODIFY THE CODE ABOVE THIS LINE----
+    //----WRITE YOUR METHOD DECLARATIONS BELOW THIS LINE----
+    bool operator==(const Money &rhs) const;
+    bool operator!=(const Money &rhs) const;
+    
+    //----WRITE YOUR METHOD DECLARATIONS ABOVE THIS LINE----
+    //----DO NOT MODIFY THE CODE BELOW THIS LINE----
+};		
+
+Money.cpp:
+===========
+bool Money::operator==(const Money &rhs) const
+{
+    return ((this->dollars == rhs.dollars) && (this->cents == rhs.cents));
+}
+
+bool Money::operator!=(const Money &rhs) const
+{
+    return !((this->dollars == rhs.dollars) && (this->cents == rhs.cents));
+}			
+						
+						
 
 						
 
