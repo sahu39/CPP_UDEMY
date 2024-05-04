@@ -14,6 +14,7 @@ public:
     
     Mystring &operator=(const Mystring &rhs); //Copy Assisgnment
     Mystring &operator=(Mystring &&rhs);//Move Assignment
+    Mystring operator-() const;         //Operator- overloading for lowercase conversion
     void display() const;
     int get_length() const;
     const char *get_str() const;

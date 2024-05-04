@@ -370,6 +370,62 @@ Call Flow for "a = "Bonjur"; " with move assignment operator:
 										|
 										|
 									a --> this=0x71fdf8,this->str = 0xd61630"Bonjur"
+									
+									
+									
+=====================================================================================================================================================
+												Operator Overloading as member methods
+												=======================================
+Unary operators as member methods:(++,--,-,!)
+================================================
+Syntax:
+--------
+							ReturnType ReturnType::operator[OP]();
+							
+e.g:
+----
+							Number Number::operator-() const;
+							Number Number::operator++();
+							Number Number::operator++(int);
+							bool Number::operator!() const;
+							
+							
+							Number n1{100};
+							Number n2 = -n1;			//n1.operator-()
+							n2 = ++n1;                  //n1.operator++()
+							n2 = n1++;                  //n1.operator++(int)
+							
+							
+							
+Operator- overloading for lowercase conversion:
+------------------------------------------------
+						Mystring larry1 {"LARRY"};
+						Mystring larry2;
+						
+						larry1.display;				//LARRY
+						larry2 = -larry1;			//larry1.operator-()
+						
+						larry1.display();			//LARRY
+						larry2.display();			//larry
+						
+						
+code:
+======
+						Mystring Mystring::operator-() const{
+							char *buff = new char(std::strlen(this->str)+1);
+							std::strcpy(buff,this->str);
+							for(size_t i=0;i<std::strlen(buff);i++)
+							{
+								buff[i] = std::tolower(buff[i]);
+							}
+							Mystring temp{buff};
+							delete[] buff;
+							return temp;
+						}
+						
+
+						
+							
 						
 						
 						

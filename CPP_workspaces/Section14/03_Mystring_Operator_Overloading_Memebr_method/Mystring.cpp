@@ -59,6 +59,21 @@ Mystring & Mystring::operator=(Mystring &&rhs)
     rhs.str = nullptr;
     return *this;
 }
+//Operator- overloading for lowercase conversion
+Mystring Mystring:: operator-() const
+{
+    char *buff = new char(std::strlen(this->str)+1);
+    std::strcpy(buff,this->str);
+    for(size_t i=0; i<std::strlen(buff); i++)
+    {
+        buff[i] = std::tolower(buff[i]);
+    }
+    Mystring temp {buff};
+    delete [] buff;
+    return temp;    
+}
+
+
 Mystring::~Mystring()
 {
     std::cout<<"Destructor is called for:"<<this<<std::endl;
