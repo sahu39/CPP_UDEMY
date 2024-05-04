@@ -380,7 +380,7 @@ Unary operators as member methods:(++,--,-,!)
 ================================================
 Syntax:
 --------
-							ReturnType ReturnType::operator[OP]();
+							ReturnType Type::operator[OP]();
 							
 e.g:
 ----
@@ -422,6 +422,48 @@ code:
 							delete[] buff;
 							return temp;
 						}
+						
+						
+						
+Binary operator as Member Methods(+,-,==,!=,<,> etc,):
+=========================================================
+Syntax:
+--------
+						ReturnType Type::operator[OP](const Type &rhs)
+						
+e.g:
+-------
+						Number Number::operator+(const Number &rhs)const;
+						Number Number::operator-(const Number &rhs)const;
+						bool Number::operator==(const Number &rhs)const;
+						bool Number::operator<(const Number &rhs)const;
+						
+						
+						
+						Number n1{100},n2{200};
+						Number n3 = n1+n2;					//n1.operator+(n2)
+						n3 = n1-n2;							//n1.operator-(n2)
+						if(n1 == n2);						//n1.operator==(n2)
+						
+						
+						
+Operator'==' overloading for Mystring class:
+===============================================
+						bool Mystring::opeartor==(const Mystring &rhs) const{
+							if(!(std::strcmp(this->str,rhs.str)))
+								return true;
+							else
+								return false;
+						}
+						
+						Mystring s1{"Jungle"};
+						Mystring s2{"Jungle"};
+						if(s1 == s2)			//s1.opeartor==(s2)
+						
+						
+
+						
+
 						
 
 						

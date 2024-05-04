@@ -73,6 +73,16 @@ Mystring Mystring:: operator-() const
     return temp;    
 }
 
+//Operator== overloading
+bool Mystring::operator ==(const Mystring &rhs) const
+{
+    std::cout << __func__ << std::endl;
+    if(!(std::strcmp(this->str,rhs.str)))
+        return true;
+    else
+        return false;
+} 
+
 
 Mystring::~Mystring()
 {
