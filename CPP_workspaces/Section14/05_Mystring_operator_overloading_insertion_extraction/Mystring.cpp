@@ -73,3 +73,18 @@ void Mystring::display() const
 {
     std::cout <<str<<":"<<get_length()<<std::endl;
 }
+
+std::ostream &operator<<(std::ostream &os, const Mystring &obj)
+{
+    os << obj.str;
+    return os;
+}
+
+std::istream &operator>>(std::istream &is, Mystring &obj)
+{
+    char *buff = new char[1000];
+    is >> buff;
+    obj = Mystring {buff};
+    delete[] buff;
+    return is;
+}

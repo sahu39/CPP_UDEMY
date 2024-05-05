@@ -673,7 +673,63 @@ Money operator+(const Money &lhs,const Money &rhs)
 }
 
 							
+=======================================================================================================================================================
+													stream insertion and extraction opeartor:(<<,>>)
+													============================================
+Mystring Larry {"Larry"};
+cout << Larry << endl;			//Larry
+
+
+Player Hero {"Hero", 100, 3};
+cout << Hero << endl;			//{name:Hero, health:100, xp:33}
+
+
+Mystream larry;
+cin >> larry;
+
+Player hero;
+cin >> hero;
+
+Notes:
+========
+Overloading insertion and extraction operation doesn't make sense.
+-Left operand must be user defined data type if we are doing operator overloading using member function.
+
+Mysting Larry;
+larry << cout;    //Normally we do not use insertion operator like this.
+
+
+stream insertion operator overloading(<<):
+=============================================
+					std::ostream &opeartor<<(std::ostream &os,const Mystring &rhs)
+					{
+						os << obj.str;			//if operator<< is a friend function
+						//os << obj.get_str();	//if operator<< is a member method
+						return os;
+					}
 					
+					
+-return a reference to the ostream so we can keep inserting.
+-Don't return ostream by value.
+
+stream extraction operator overloading(>>):
+=============================================
+					std::istream &operator>>(std::istream &is, Mystring &rhs)
+					{
+						char *buff = new char[1000];
+						is >> buff;
+						rhs = Mystring {buff};
+						delete[] buff;
+						return is;
+					}
+
+
+-return a reference to the istream  so we can keep inserting.
+-Update the object passed in.
+
+
+
+
 					
 						
 

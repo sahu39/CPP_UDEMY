@@ -17,6 +17,8 @@ public:
     void display() const;
     int get_length() const;
     const char *get_str() const;
+    friend std::ostream &operator<<(std::ostream &os, const Mystring &obj);
+    friend std::istream &operator>>(std::istream &is, Mystring &obj);
     
 };
 #endif
