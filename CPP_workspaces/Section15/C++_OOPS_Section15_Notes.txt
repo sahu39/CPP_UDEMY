@@ -1,0 +1,117 @@
+														Inheritance:
+														============
+What is Inheritance:
+================
+-Provides a method for creating new classes from existing class.
+-The new class contains data and behaviours of existing class.
+-Allows reuses of existing class.
+-Allows new classes to modify behaviours of existing classes to make it unique.
+	.without modifying existing class
+	
+Example Related class:
+==========================
+Banking Application:
+-------------------
+	-Account----------------------balance,deposit,withdraw
+	-Saving Accounts--------------balance,deposit,withdraw,interest rate
+	-Checking Accounts.-----------balance,deposit,withdraw,minimum balance,per check fee
+	-Trust Accounts.--------------balance,deposit,withdraw,interest rate
+	
+	
+Accounts with inheritance code use:
+=====================================
+class Account{
+	//balance,deposit,withdraw;
+};
+
+class Saving_Account : public Account{
+	//interest_rate, specialized_withdraw;
+};
+
+class Checking_Account : public Account{
+	//minimum balance, per check fee, specialized_withdraw;
+};
+
+class Trust_Account : public Account{
+	//interest_rate, specialized_withdraw,..;
+};
+
+
+
+
+	
+Graphic Application:
+======================
+	-Shape
+	-Line
+	-Oval
+	-Circle
+	-Square
+	-etc.
+	
+	
+Terminology and notation:
+=============================
+Inheritance:
+------------
+Process of creating a new clss from a existing class.
+Allows reuses of existing class
+Single inheritance:
+--------------------
+A new class is created from anothe 'single' class.
+
+Multiple Inheritance:
+-----------------------
+A new class is created from two (or more) other classes.
+
+
+
+Base class(Parent Class, Super Class):
+-----------------------------------------
+-The class being extended or inherited from.
+
+Derived class(child class, sub class):
+-----------------------------------------
+-The class being created form sub class.
+-Will inherit attributes and operations from Base class.
+
+"IS-A" relationship:
+==========================
+-public Inheritance.
+-Derived classes are sub type of base class.
+-Can use a derived class object whenever we use a base class object.
+
+Inheritance vs composition:
+============================
+-Public inheritance:
+------------------------
+-"IS-A" relationship.
+-Employee(Derived/Child) "IS-A" person(Base/Parent).
+-Checking_Account "IS-A" Account.
+-Circle "IS-A" Shape.
+
+-Composition:
+----------------
+-Creates a "has-a" relationship between classes.
+-Person "has-a" Account.
+-Player "has-a" Special attack.
+-Circle "has-a" Location.
+
+class Person{
+	std::string name;	//"has-a" name
+	Account account;	//"has-a" Account
+};
+
+
+===========================================================================================================================================
+												Deriving classes from existing classes
+												======================================
+class Base{
+	//base class members
+};
+
+class Derived:access specifier Base{
+	//Derived class members
+};
+
+Access-specifiers can be public,private or protected
