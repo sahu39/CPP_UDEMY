@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Saving_Account.h"
 
-Saving_Account::Saving_Account(){}
+Saving_Account::Saving_Account():int_rate{3.87}{}
 Saving_Account::~Saving_Account(){}
 
 void Saving_Account::deposit(double amt)

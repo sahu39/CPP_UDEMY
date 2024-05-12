@@ -1,7 +1,10 @@
 #include <iostream>
 #include "Account.h"
 
-Account::Account(){}
+Account::Account()
+    :balance{0.0},name{"An Account"}
+{
+}
 Account::~Account(){}
 
 void Account::deposit(double amt)
