@@ -115,3 +115,70 @@ class Derived:access specifier Base{
 };
 
 Access-specifiers can be public,private or protected
+
+Access Specifiers:
+----------------------
+public:
+--------
+	-Most Common
+	-Establishes "IS-A" relationship between base and derived class.
+	
+private and protected:
+----------------------
+	-Establishes "derived class "has-a"  base class" relationship.
+	
+	
+Inheritance protected members and class access:
+--------------------------------------------------
+Protected member class access specifier:
+--------------------------------------------
+class Base{
+	protected:
+		//protected base class member
+
+};
+
+-Accessible from Base class itself
+-Accessible classes derived from base.
+-Not accessible by objects of base(parent) or derived(child)
+
+
+The protected class member modifier:
+-----------------------------------
+class Base{
+	public:
+		int a;	//public base class members
+	
+	protected:
+		int b;  //protected base class members
+		
+	private:
+		int c;	//private base class member
+};
+
+Access with public inheritance:
+----------------------------------
+Base Class																			derived class
+-----------																			--------------
+public:a																			public:a
+protected:b                          public inheritance                             protected:b
+private:c																			c: no access
+
+
+
+Access with protected inheritance:
+----------------------------------
+Base Class																			derived class
+-----------																			--------------
+public:a																			protected:a
+protected:b                          protected inheritance                          protected:b
+private:c																			c: no access
+
+
+Access with private inheritance:
+----------------------------------
+Base Class																			derived class
+-----------																			--------------
+public:a																			private:a
+protected:b                          private inheritance                            private:b
+private:c																			c: no access
