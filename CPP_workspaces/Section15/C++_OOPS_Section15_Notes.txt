@@ -182,3 +182,89 @@ Base Class																			derived class
 public:a																			private:a
 protected:b                          private inheritance                            private:b
 private:c																			c: no access
+
+
+=================================================================================================================================================
+											Constructor and Destructor in inheritance
+											==============================================
+-A derived class inherits from its base class.
+-The base part of the derived class must be initialized before the derived class is initialized.
+-When Derived object is created 
+	1st.Base class constructor is executed.
+	2nd.Derived class constructor is executed.
+-
+Constructors and class initilization:
+-------------------------------------------
+class Base{
+public:
+	Base(){cout << "Base Constructor" << endl;}
+};
+
+class Derived:public Base{
+public:
+	Derived(){cout << "Derived Constructor" << endl;}
+};
+
+
+																				OUTPUT
+																				------
+Base base;																		Base Constructor
+
+
+
+
+Derived d;																		Base Constructor
+																				Derived Constructor	
+
+
+
+Destructor:
+----------------
+-Class Destructors are invoked in the reverse order as constructors.
+-The derived class of the Derived class must br destroyed before the base class destructor is invoked.
+-When a derived object is destroyed
+	1st.Derived class destructor is executed.
+	2nd.Base class destructor is executed.
+	3rd.Each destructor should free resources allocates in it's own constructors.
+	
+class Base{
+public:
+	Base(){cout << "Base Constructor" << endl;}
+	~Base(){cout << "Base Destructor" << endl;}
+};
+
+class Derived:public Base{
+public:
+	Derived(){cout << "Derived Constructor" << endl;}
+	~Derived(){cout << "Derived Destructor" << endl;}
+};
+
+
+
+																				OUTPUT
+																				------
+Base base;																		Base Constructor
+																				Base Destructor
+
+
+
+Derived d;																		Base Constructor
+																				Derived Constructor
+																				Derived Destructor
+																				Base Destructor
+																				
+-Derived class does not inherit:
+----------------------------------
+-Base class constructor
+-Base class destructor.
+-Base class overloaded assignment operators.
+-Base class friend functions.
+
+-However the derived class constructors,destructors, and overloaded assignment operators can invoke the base class versions.
+-explicit inheritance of 'non-special' constructors(overloaded constructors)
+	using base::base
+	
+
+
+	
+
