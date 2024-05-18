@@ -307,8 +307,214 @@ int main()
 
 op:
 ------
+Base (int) overloaded constructor
+Derived (int) overloaded constructor
+Derived destructor
+Base destructor
 
+====================================================================================================================================================
+															copy/move constructors and operator = with derived class
+															============================================================
+-Not Automatically inherited form Base class.
+-We can explicitly invoke the Base class versions from the Derived class.
+
+Copy constructor:
+-----------------
+-Can invoke copy constructor explicitly
+	-Derived object 'other' will be sliced.()
+-If we are copying a derived object then we have to make sure base part is also getting copied.
+Syntax:
+----------
+Derived::Derived(const Derived &other)
+		:Base(other),{Derived initilization list}
+{
+	//code
+}
+
+-We have a "is-a" inheritance.
+-So Derived is a Base.
+-Since Derived is a base so we can pass a derived to a method that expects a Base.
+-In this case the compiler uses slicing and slices out the Base part of a Derived object.
+-In this case we are copying Base part of the Derived object.
+
+example:
+----------
+class Base{
+	int value;
+public:
+	Base(const Base &other):value{other.value}{
+		cout << "Base Copy Constructor" << endl;
+	}
+};
+
+class Derived:public Base{
+	int doubled_value;
+public:
+	Derived(const Derived &other)
+		:Base(other),doubled_value{other.doubled_value}{
+		cout << "Derived Copy Constructor" << endl;
+	}
+};
 
 
 	
 
+overloaded operator=:
+-------------------------
+class Base{
+	int value;
+public:
+	Base &operator=(const Base &rhs)
+	{
+		if(this != &rhs)
+			value = rhs.value;
+		return *this;
+	}
+};
+
+
+
+class Derived{
+	int doubled_value;
+public:
+	Derived &operator=(const Derived &rhs)
+	{
+		if(this != &rhs){
+			Base::operator=(rhs);
+			doubled_value = rhs.doubled_value;
+		}
+		
+		return *this;
+	}
+};
+
+
+Notes:
+-------
+copy/move constructors and overloaded operator=
+-often you do not provide your own.
+
+-If you do not defined them in derived
+	-Then the compiler will create them automatically and call the base class version's.
+	
+-If you do provide derived verisons.
+	-Then you must invoke the Base class versions explicitly yourself.
+	
+code example:
+-------------	
+#include <iostream>
+using namespace std;
+
+class Base{
+private:
+    int val;
+public:
+    Base():val{0}{cout << "Base no-arg constructor" << endl;}
+    Base(int x):val{x}{cout << "Base (int) overloaded constructor" << endl;}
+    Base(const Base &rhs)
+        :val{rhs.val}
+    {
+        cout <<"Base Copy Constructor" << endl;
+    }
+    //Overloaded operator=
+    Base &operator=(const Base &rhs)
+    {
+        if(this != &rhs)
+        {
+            this->val = rhs.val;
+        }
+        return *this;
+    }
+    ~Base(){cout << "Base destructor" << endl;}
+};
+
+class Derived:public Base{
+private:
+    int doubled_val;
+public:
+    Derived()
+        :Base{},doubled_val{0}
+    {
+        cout << "Derived no-arg constructor" << endl;
+    }
+    Derived(int x)
+        :Base{x},doubled_val{x*2}
+    {
+        cout << "Derived (int) overloaded constructor" << endl;
+    }
+    Derived(const Derived &other)
+        :Base(other),doubled_val{other.doubled_val}
+    {
+        cout << "Derived Copy Constructor" << endl;
+    }
+    Derived &operator=(const Derived &rhs)
+    {
+        if(this != &rhs)
+        {
+            Base::operator =(rhs);
+            doubled_val = rhs.doubled_val;
+        }
+        return *this;
+    }
+    ~Derived(){cout << "Derived destructor" << endl;}
+};
+
+int main()
+{
+	//Derived d;
+    Derived d{100};
+    Derived d1{d};
+	d = d1;
+	return 0;
+}
+
+
+op:
+------	
+Base (int) overloaded constructor
+Derived (int) overloaded constructor
+Base Copy Constructor
+Derived Copy Constructor
+Derived destructor
+Base destructor
+Derived destructor
+Base destructor
+
+
+Call flow for "d = d1;"
+==========================
+	1st:d = d1
+		  |
+		  |
+		  |
+		  |
+	2nd:Derived &operator=(const Derived &rhs)
+		{
+			if(this != &rhs)
+			{
+				Base::operator =(rhs);
+
+		}
+					|
+					|
+					|
+					|
+	3rd:Base &operator=(const Base &rhs)
+		{
+			if(this != &rhs)
+			{
+				this->val = rhs.val;
+			}
+			return *this;
+		}
+	4th:Derived &operator=(const Derived &rhs)
+		{
+			if(this != &rhs)
+			{
+            ---
+			--
+				doubled_val = rhs.doubled_val;
+			}
+			return *this;
+		}
+	
