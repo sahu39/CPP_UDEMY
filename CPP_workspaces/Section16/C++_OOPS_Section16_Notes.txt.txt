@@ -1,0 +1,129 @@
+															PolyMorphism & Inheritance
+															=============================
+															
+When we overload a functions and when we overload an operator this comes into picture.
+Polymorphism:
+=============
+-compile time/early binding/static binding----Before the program executes/Somethings that compiler takes care of way before the program runs.
+-Run time/late binding/dynamic binding()------Associations what the programmer wants to do during program is running or executes.
+
+Runtime polymorphism:
+======================
+-Being Able to assign different meanings to the same function at run-time.
+
+Allow us to thing more abstractly:
+=======================================
+-PolyMorphism allows us to run correct function.
+ example: We can run specific version of Deposit, withdrawls and print from classes Account,Deposit_Account,Current_Account at run time using only Account
+		  Refernce.
+		  
+-Let C++ figure out which function to call at run-time.
+
+-In c++ default type of binding is static binding.
+
+-So Run time polymorphism is achieved by:
+==============================================
+-Inheritance
+-Base class pointers and references.
+-virtual functions.
+
+PolyMorphism:
+==============
+Compile time:
+---------------
+1.Function Overloading.
+2.Operator Overloading:
+
+Run time:
+----------
+Function Overriding.---->Using Inheritance,Base class pointers and references and virtual functions.
+
+
+example:
+===========
+An non polymorphic example:(Static Binding)
+----------------------------------------------
+Account a;
+a.withdraw(1000);				//Account::withdraw()
+
+
+Saving b;
+b.withdraw(1000);				//Saving::withdraw()
+
+Checking c;
+c.withdraw(1000);				//Checking::withdraw()
+
+Account d;
+d.withdraw(1000);				//Trust::withdraw()
+
+
+Account *p = new Trust();		//Trust is an account so Account *p can hold the address of Trust
+p->withdraw(1000);				//Account::withdraw() but it should be Trust::withdraw() but due to static binding the Account::withdraw is called
+								  during compile time already.
+								  
+								  
+								  
+An non polymorphic example2:(Static Binding)
+----------------------------------------------
+void display_account(const Account &acc)
+{
+	acc::display();		//Will always call Account::display() due to static binding/compile time binding/early binding
+}
+
+Account a;
+display_account(a);
+
+Saving b;
+display_account(b);
+
+Checking c;
+display_account(c);
+
+Trust d;
+display_account(d);
+ 
+
+
+A polymorphic example:(Run time binding/Dynamic Binding/late binding)
+-------------------------------------------------------------------
+//withdraw method is virtual in Account.
+
+Account a;
+a.withdraw(1000);				//Account::withdraw()
+
+
+Saving b;
+b.withdraw(1000);				//Saving::withdraw()
+
+Checking c;
+c.withdraw(1000);				//Checking::withdraw()
+
+Account d;
+d.withdraw(1000);				//Trust::withdraw()
+
+
+Account *p = new Trust();		//Trust is an account so Account *p can hold the address of Trust
+p->withdraw(1000);				//Trust::withdraw() but due to late binding/Dynamic Binding. To make the runtime binding withdarw method is assigned a
+									keyword virtual
+									
+									
+A polymorphic example2:(Run time binding/Dynamic Binding/late binding)
+-------------------------------------------------------------------		
+//display() method is defined as virtual to avoid static binding/compile time binding and make it as bind at run time.
+							
+void display_account(const Account &acc)
+{
+	acc::display();		//Will always call the display() method depending upon the object's type at RUN-TIME
+}
+
+Account a;
+display_account(a);
+
+Saving b;
+display_account(b);
+
+Checking c;
+display_account(c);
+
+Trust d;
+display_account(d);
