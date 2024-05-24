@@ -127,3 +127,39 @@ display_account(c);
 
 Trust d;
 display_account(d);
+
+======================================================================================================================================================
+													Using a Base class pointer
+													==========================
+-For Dynamic polymorphism we must have:
+	-Inheritance.
+	-Base class pointer and Base class reference.
+	-virtual functions
+	
+	
+Example:
+=============
+Account *p1 = new Account();
+Account *p2 = new Saving();
+Account *p3 = new Checking();
+Account *p4 = new Trust();
+
+//All accounts are using public "IS-A" inheritance
+
+p1->withdraw(1000);		//Account::withdraw()
+p2->withdraw(1000);		//Saving::withdraw()
+p3->withdraw(1000);		//Checking::withdraw()
+p4->withdraw(1000);		//Trust::withdraw()
+
+Account *array [] = {p1,p2,p3,p4};
+
+for(auto i=0; i<4; i++)
+	array[i]->withdraw(1000);
+	
+	
+Vector<Account *> vec_arr {p1,p2,p3,p4};
+for(auto acc_ptr:accounts)
+{
+	acc_ptr->withdraw(1000);
+}
+
