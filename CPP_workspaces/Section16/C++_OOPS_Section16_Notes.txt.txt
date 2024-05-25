@@ -163,3 +163,39 @@ for(auto acc_ptr:accounts)
 	acc_ptr->withdraw(1000);
 }
 
+=======================================================================================================================================================
+														Virtual Functions
+														=================
+-Redefined functions in the Derived class and Base class bound statically.
+-Overriden functions are bound dynamically. We do this by declaring the function to virtual.
+-Virtual functions are overriden.
+-Allow us to treat all objects generally as objects of the base class.
+
+
+Declaring virtual functions:
+=================================
+-Declare the function you want to make as virtual in the base class.
+-Virtual functions are virtual all the way down the hirerachy down this point.
+-Dynamic polymorphism only via Account class pointer or refernce.
+
+class Account{
+	virtual void withdraw(double amount);
+	. . .
+};
+
+-In the Account Base class we have declared the withdarw method as virtual with virtual keyword.
+-withdraw is a virtual function which means it can be overriden in the derived classes and it will bind dynamically at run time when we use base class
+ pointer or refernce.
+ 
+ 
+-Override the function in the Derived classes.
+-Function sugnature and return type must match exactly. If you don't do it compiler treats as redefinition and statically bind the method.
+-virtual keyword is not required but is best practice.
+-if you don't provide and overridden version it is inherited from it's base class.
+
+
+class Checking : public Account{
+	virtual void withdarw(double amount);
+	....
+};
+
