@@ -199,3 +199,274 @@ class Checking : public Account{
 	....
 };
 
+========================================================================================================================================================
+													Virtual Destructors:
+													====================
+-If a derived class is destroyed by deleting its storage via the base class pointer and the class is a non virtual destructor. then behaviour is undefined
+ in the c++ standard.
+-Derived objects must be destoyed in the right order starting at the correct destructor.
+
+Solution:
+==========
+-If a class has a virtual functions.
+-Always provide a public virtual destructor.
+-If base class destructor is virtual then all derived class destructors are also virtual.
+
+class Account{
+	virtual void withdraw(double amount);
+	virtual ~Account();
+	. . .
+};
+
+example:
+============
+without virtual Destructor:
+============================
+#include <iostream>
+#include <vector>
+class Account{
+public:
+    virtual void withdraw(double balance)
+    {
+        std::cout << "Account class:" << __func__ << ":" << balance << std::endl;
+    }
+    ~Account(){std::cout <<"Account:: Destructor" << std::endl;}
+};
+
+class Saving_Account : public Account{
+public:
+    virtual void withdraw(double balance)
+    {
+        std::cout << "Saving_Account class:" << __func__ << ":" << balance << std::endl;
+    }
+    ~Saving_Account(){std::cout <<"Saving_Account:: Destructor" << std::endl;}
+};
+
+class Checking_Account : public Account{
+public:
+    virtual void withdraw(double balance)
+    {
+        std::cout << "Checking_Account class:" << __func__ << ":" << balance << std::endl;
+    }
+    ~Checking_Account(){std::cout <<"Checking_Account:: Destructor" << std::endl;}
+};
+
+class Trust_Account : public Account{
+public:
+    virtual void withdraw(double balance)
+    {
+        std::cout << "Trust_Account class:" << __func__ << ":" << balance << std::endl;
+    }
+    ~Trust_Account(){std::cout <<"Trust_Account:: Destructor" << std::endl;}
+};
+
+int main()
+{
+	Account *p1 = new Account();
+    Account *p2 = new Saving_Account();
+    Account *p3 = new Checking_Account();
+    Account *p4 = new Trust_Account();
+    
+    std::cout << "\n===========Pointers==========" << std::endl;
+    p1->withdraw(1000);
+    p2->withdraw(1000);
+    p3->withdraw(1000);
+    p4->withdraw(1000);
+    
+    std::cout << "\n===========Array==========" << std::endl;
+    Account *account [] = {p1,p2,p3,p4};
+    
+    for(auto i=0 ; i<4; i++)
+        account[i]->withdraw(1000);
+        
+    std::cout << "\n==========Vetor===========" << std::endl;
+    std::vector <Account *> acc_vec {p1,p2,p3,p4};
+    for(auto acc:acc_vec)
+        acc->withdraw(1000);
+        
+    std::cout << "\n==========Vetor===========" << std::endl;    
+    acc_vec.push_back(p4);
+    acc_vec.push_back(p4);
+    for(auto acc:acc_vec)
+        acc->withdraw(1000);
+        
+        
+    std::cout << "\n==========Deleting===========" << std::endl; 
+    delete p1;
+    delete p2;
+    delete p3;
+    delete p4;
+    
+	return 0;
+}
+
+Compilation Warning:
+========================
+C:\WINDOWS\system32\cmd.exe /C ""C:/Program Files/mingw-w64/mingw64/bin/mingw32-make.exe" -j8 SHELL=cmd.exe -e -f  Makefile"
+"----------Building project:[ 04_VirtualDestructors - Debug ]----------"
+mingw32-make.exe[1]: Entering directory 'D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/04_VirtualDestructors'
+"C:/Program Files/mingw-w64/mingw64/bin/g++.exe"  -c  "D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/04_VirtualDestructors/main.cpp" -g -O0 -std=c++17 -Wall  -o Debug/main.cpp.o -I. -I.
+D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/04_VirtualDestructors/main.cpp: In function 'int main()':
+D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/04_VirtualDestructors/main.cpp:71:12: warning: deleting object of polymorphic class type 'Account' which has non-virtual destructor might cause undefined behavior [-Wdelete-non-virtual-dtor]
+     delete p1;
+            ^~
+D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/04_VirtualDestructors/main.cpp:72:12: warning: deleting object of polymorphic class type 'Account' which has non-virtual destructor might cause undefined behavior [-Wdelete-non-virtual-dtor]
+     delete p2;
+            ^~
+D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/04_VirtualDestructors/main.cpp:73:12: warning: deleting object of polymorphic class type 'Account' which has non-virtual destructor might cause undefined behavior [-Wdelete-non-virtual-dtor]
+     delete p3;
+            ^~
+D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/04_VirtualDestructors/main.cpp:74:12: warning: deleting object of polymorphic class type 'Account' which has non-virtual destructor might cause undefined behavior [-Wdelete-non-virtual-dtor]
+     delete p4;
+            ^~
+"C:/Program Files/mingw-w64/mingw64/bin/g++.exe" -o Debug/04_VirtualDestructors @"04_VirtualDestructors.txt" -L.   -static
+mingw32-make.exe[1]: Leaving directory 'D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/04_VirtualDestructors'
+====0 errors, 4 warnings====
+
+
+op:
+=====
+Saving_Account class:withdraw:1000
+Checking_Account class:withdraw:1000
+Trust_Account class:withdraw:1000
+
+===========Array==========
+Account class:withdraw:1000
+Saving_Account class:withdraw:1000
+Checking_Account class:withdraw:1000
+Trust_Account class:withdraw:1000
+
+==========Vetor===========
+Account class:withdraw:1000
+Saving_Account class:withdraw:1000
+Checking_Account class:withdraw:1000
+Trust_Account class:withdraw:1000
+
+==========Vetor===========
+Account class:withdraw:1000
+Saving_Account class:withdraw:1000
+Checking_Account class:withdraw:1000
+Trust_Account class:withdraw:1000
+Trust_Account class:withdraw:1000
+Trust_Account class:withdraw:1000
+
+==========Deleting===========
+Account:: Destructor
+Account:: Destructor
+Account:: Destructor
+Account:: Destructor
+
+
+
+
+
+with virtual destructor:
+===========================
+#include <iostream>
+#include <vector>
+class Account{
+public:
+    virtual void withdraw(double balance)
+    {
+        std::cout << "Account class:" << __func__ << ":" << balance << std::endl;
+    }
+   virtual ~Account(){std::cout <<"Account:: Destructor" << std::endl;}
+};
+
+class Saving_Account : public Account{
+public:
+    virtual void withdraw(double balance)
+    {
+        std::cout << "Saving_Account class:" << __func__ << ":" << balance << std::endl;
+    }
+    virtual ~Saving_Account(){std::cout <<"Saving_Account:: Destructor" << std::endl;}
+};
+
+class Checking_Account : public Account{
+public:
+    virtual void withdraw(double balance)
+    {
+        std::cout << "Checking_Account class:" << __func__ << ":" << balance << std::endl;
+    }
+    virtual ~Checking_Account(){std::cout <<"Checking_Account:: Destructor" << std::endl;}
+};
+
+class Trust_Account : public Account{
+public:
+    virtual void withdraw(double balance)
+    {
+        std::cout << "Trust_Account class:" << __func__ << ":" << balance << std::endl;
+    }
+    virtual ~Trust_Account(){std::cout <<"Trust_Account:: Destructor" << std::endl;}
+};
+
+int main()
+{
+	Account *p1 = new Account();
+    Account *p2 = new Saving_Account();
+    Account *p3 = new Checking_Account();
+    Account *p4 = new Trust_Account();
+    
+    std::cout << "\n===========Pointers==========" << std::endl;
+    p1->withdraw(1000);
+    p2->withdraw(1000);
+    p3->withdraw(1000);
+    p4->withdraw(1000);
+    
+    std::cout << "\n===========Array==========" << std::endl;
+    Account *account [] = {p1,p2,p3,p4};
+    
+    for(auto i=0 ; i<4; i++)
+        account[i]->withdraw(1000);
+        
+    std::cout << "\n==========Vetor===========" << std::endl;
+    std::vector <Account *> acc_vec {p1,p2,p3,p4};
+    for(auto acc:acc_vec)
+        acc->withdraw(1000);
+        
+    std::cout << "\n==========Vetor===========" << std::endl;    
+    acc_vec.push_back(p4);
+    acc_vec.push_back(p4);
+    for(auto acc:acc_vec)
+        acc->withdraw(1000);
+        
+        
+    std::cout << "\n==========Deleting===========" << std::endl; 
+    delete p1;
+    delete p2;
+    delete p3;
+    delete p4;
+    
+	return 0;
+}
+
+op:
+======
+===========Array==========
+Account class:withdraw:1000
+Saving_Account class:withdraw:1000
+Checking_Account class:withdraw:1000
+Trust_Account class:withdraw:1000
+
+==========Vetor===========
+Account class:withdraw:1000
+Saving_Account class:withdraw:1000
+Checking_Account class:withdraw:1000
+Trust_Account class:withdraw:1000
+
+==========Vetor===========
+Account class:withdraw:1000
+Saving_Account class:withdraw:1000
+Checking_Account class:withdraw:1000
+Trust_Account class:withdraw:1000
+Trust_Account class:withdraw:1000
+Trust_Account class:withdraw:1000
+
+==========Deleting===========
+Account:: Destructor
+Saving_Account:: Destructor
+Account:: Destructor
+Checking_Account:: Destructor
+Account:: Destructor
+Trust_Account:: Destructor
+Account:: Destructor
