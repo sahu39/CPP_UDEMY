@@ -470,3 +470,162 @@ Checking_Account:: Destructor
 Account:: Destructor
 Trust_Account:: Destructor
 Account:: Destructor
+
+========================================================================================================================================================
+														Using Override keyword
+														==========================
+The override specifier:
+=======================
+-We can override Base class virtual functions
+-The function signature and return must be EXACTLY the same.
+-If they are different then we have redefinition not overriding.
+-Redefinition is statically bound.
+-Overriding is dynamically bound.
+-C++11 provides an override specifier to have the compiler ensure overriding.
+
+example:
+----------
+#include <iostream>
+
+class Base{
+public:
+    virtual void say_hello() const{
+        std::cout << "Base::" << __func__ << " is called" << std::endl;
+    }
+    virtual ~Base() {std::cout<< __func__ << std::endl;}
+};
+class Derived : public Base{
+public:
+    virtual void say_hello() {  //Forget the const so not overriding
+        std::cout << "Derived::" << __func__ << " is called" << std::endl;
+    }
+    virtual ~Derived()  {std::cout<< __func__ << std::endl;}
+};
+
+int main()
+{
+	Base *b = new Base();
+    b->say_hello();
+    
+    Derived *d = new Derived();
+    d->say_hello();
+    
+    Base *derived =  new Derived();
+    derived->say_hello();
+    
+    delete b;
+    delete d;
+    delete derived;
+	return 0;
+}
+op:
+======
+Base::say_hello is called
+Derived::say_hello is called
+Base::say_hello is called
+~Base
+~Derived
+~Base
+~Derived
+~Base
+
+-say_hello() method signatures are different in both base and derived class.
+-So Derived redefines say_hello() instead of overriding it.
+
+override specifier example:
+==============================
+#include <iostream>
+
+class Base{
+public:
+    virtual void say_hello() const{
+        std::cout << "Base::" << __func__ << " is called" << std::endl;
+    }
+    virtual ~Base() {std::cout<< __func__ << std::endl;}
+};
+class Derived : public Base{
+public:
+    virtual void say_hello() override{  //Forget the const so not overriding
+        std::cout << "Derived::" << __func__ << " is called" << std::endl;
+    }
+    virtual ~Derived()  {std::cout<< __func__ << std::endl;}
+};
+
+int main()
+{
+	Base *b = new Base();
+    b->say_hello();
+    
+    Derived *d = new Derived();
+    d->say_hello();
+    
+    Base *derived =  new Derived();
+    derived->say_hello();
+    
+    delete b;
+    delete d;
+    delete derived;
+	return 0;
+}
+
+compilation error:
+==================
+C:\WINDOWS\system32\cmd.exe /C ""C:/Program Files/mingw-w64/mingw64/bin/mingw32-make.exe" -j8 SHELL=cmd.exe -e -f  Makefile"
+"----------Building project:[ 05_OverrideSpecifier - Debug ]----------"
+mingw32-make.exe[1]: Entering directory 'D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/05_OverrideSpecifier'
+"C:/Program Files/mingw-w64/mingw64/bin/g++.exe"  -c  "D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/05_OverrideSpecifier/main.cpp" -g -O0 -std=c++17 -Wall  -o Debug/main.cpp.o -I. -I.
+D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/05_OverrideSpecifier/main.cpp:12:18: error: 'virtual void Derived::say_hello()' marked 'override', but does not override
+     virtual void say_hello() override{  //Forget the const so not overriding
+                  ^~~~~~~~~
+mingw32-make.exe[1]: *** [05_OverrideSpecifier.mk:98: Debug/main.cpp.o] Error 1
+mingw32-make.exe: *** [Makefile:5: All] Error 2
+mingw32-make.exe[1]: Leaving directory 'D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/05_OverrideSpecifier'
+====1 errors, 0 warnings====
+
+
+modified code with override and const specifier:
+==================================================
+#include <iostream>
+
+class Base{
+public:
+    virtual void say_hello() const{
+        std::cout << "Base::" << __func__ << " is called" << std::endl;
+    }
+    virtual ~Base() {std::cout<< __func__ << std::endl;}
+};
+class Derived : public Base{
+public:
+    virtual void say_hello() const override{  //Forget the const so not overriding
+        std::cout << "Derived::" << __func__ << " is called" << std::endl;
+    }
+    virtual ~Derived()  {std::cout<< __func__ << std::endl;}
+};
+
+int main()
+{
+	Base *b = new Base();
+    b->say_hello();
+    
+    Derived *d = new Derived();
+    d->say_hello();
+    
+    Base *derived =  new Derived();
+    derived->say_hello();
+    
+    delete b;
+    delete d;
+    delete derived;
+	return 0;
+}
+
+op:
+====
+Base::say_hello is called
+Derived::say_hello is called
+Derived::say_hello is called
+~Base
+~Derived
+~Base
+~Derived
+~Base
