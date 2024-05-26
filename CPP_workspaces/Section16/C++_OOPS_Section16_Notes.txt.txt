@@ -629,3 +629,43 @@ Derived::say_hello is called
 ~Base
 ~Derived
 ~Base
+
+========================================================================================================================================================
+														The final Specifier
+														====================
+-C++11 provides the final specifier 
+	-When used at the class level.
+	-Prevent a class from being derived from.
+	
+	-When used in the method level.
+	-Prevents virtual method from being overridden in derived class.
+	
+Syntax:
+=========
+final class
+-----------
+class My_class final{					//My_class can not be derived further
+	. . .
+};
+
+class Derived final : public Base{		//Derived can not be derived further
+	. . .
+};
+
+If we try to derive any class from the above class than the compiler will generate compiler error.
+
+
+final method:
+----------------
+class A{
+public:
+	virtual void do_something();
+};
+
+class B : public A{
+	virtual void do_something() final;		//Prevent further overriding
+};
+
+class C : public B{
+	virtual void do_something();			//Compiler error: Can't do overriding
+};
