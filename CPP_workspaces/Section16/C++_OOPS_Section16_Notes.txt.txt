@@ -694,3 +694,627 @@ do_withdraw(a,1000);		//Account::withdraw()
 
 Trust t;
 do_withdraw(t,1000);		//Trust::withdraw()
+=======================================================================================================================================================
+												Pure Virtual Function as PolyMorphism
+												=====================================
+Abstract class:
+================
+-Cannot instantiate objects.
+-These classes are used as base classes in inheritance hirerachies.
+-Often refres as abstract base class.
+
+Concrete class:
+=============
+-Used to instantiate objects from.
+-All their members functions are defined.
+
+e.g:
+=====
+---Account-------------->Abstract Base Class
+	Checking_Account---->Concrete class---------------Member functions need to be defined
+	Saving_Account------>Concrete class---------------Member functions need to be defined
+	
+	
+---Employee------------->Abstract Base Class
+	Faculty------------->Concrete class inherited from Employee---->Member functions need to be defined
+	Staff--------------->Concrete class inherited from Employee---->Member functions need to be defined
+	
+-Abstarct Base Class 
+	-To generic to create object from
+		e.g:Shape, Empolyee, Account, Player
+		
+	-Serve as parent to Derived classes that may have objects.
+	-Contains at least one pure virtual function.
+	
+Pure Virtual Function:
+=========================
+-It is a virtual function used to make a class abstarct.
+-Specified with "=0" in its declartion.
+-Syntax:						 virtual void function() = 0;	//pure virtual function
+-Typically do not provide implementations.
+
+
+-Derived classes MUST override the base class.
+-If Derived class does not override then the derived class is also abstract.
+-Concrete class must implement the function which is declared as pure virtual function in the Base class.
+
+	virtual void shape() = 0 ;	//Shape
+	virtual void defend() = 0;	//Player
+	
+example:
+===========
+class Shape{
+private:
+	//Attribute from Shape class
+public:
+	virtual void draw() = 0;		//pure virtual Function
+	virtual void rotate() = 0;		//pure virtual function
+	virtual ~shape();
+	...
+};
+
+class Circle : public Shape{
+private:
+	//Attribute from Shape class
+public:
+	virtual void draw() override{
+		//code to draw a circle
+	}		
+	virtual void rotate() override{
+		//code to rotate a circle
+	} 		//pure virtual function
+	virtual ~Circle();
+	...
+};
+
+
+Shape shape;				//Error
+Shape *ptr = new Shape();	//Error
+
+//Using pointers or reference to refer concrete classes derived from them.
+
+Shape *ptr = new Circle();
+ptr->draw();
+ptr->rotate();
+
+
+code example:
+==============
+Example 1:
+------------
+
+#include <iostream>
+#include <vector>
+
+class Shape{    //Abstract Base Class
+private:
+    //Abstract Base Class Data;
+public:
+    virtual void draw() = 0;    //pure virtual function
+    virtual void rotate() = 0;  //pure virtual function
+    virtual ~Shape(){
+        std::cout << "Destroying Shape" << std::endl;
+    }
+
+};
+class Open_Shape : public Shape{    //Abstarct Class
+private:
+    //Abstract Open_Shape data
+public:
+    virtual ~Open_Shape() {}
+};
+
+class Close_Shape : public Shape{    //Abstarct Class
+private:
+    //Abstract Close_Shape data
+public:
+    virtual ~Close_Shape() {}
+};
+
+class Circle : public Shape{
+private:
+    //Circle data
+public:
+    virtual void draw() override{
+        std::cout << "Drawing a Circle" << std::endl;
+    }
+    
+    virtual void rotate() override{
+        std::cout << "Rotateing a Circle" << std::endl;
+    }
+    virtual ~Circle()
+    {
+        std::cout << "Destroying Circle" << std::endl;
+    }
+};
+
+class Line : public Shape{
+private:
+    //Circle data
+public:
+    virtual void draw() override{
+        std::cout << "Drawing a Line" << std::endl;
+    }
+    
+    virtual void rotate() override{
+        std::cout << "Rotateing a Line" << std::endl;
+    }
+    virtual ~Line()
+    {
+        std::cout << "Destroying Line" << std::endl;
+    }
+};
+int main()
+{
+    Shape s;
+    Shape *p = new Shape();
+	return 0;
+}
+
+Compilation Error:
+=================
+C:\WINDOWS\system32\cmd.exe /C ""C:/Program Files/mingw-w64/mingw64/bin/mingw32-make.exe" -j8 SHELL=cmd.exe -e -f  "07_PureVirtualFunction.mk"  MakeIntermediateDirs && "C:/Program Files/mingw-w64/mingw64/bin/mingw32-make.exe" -j8 SHELL=cmd.exe -e -f  "07_PureVirtualFunction.mk"  Debug/main.cpp.o"
+----------Building project:[ 07_PureVirtualFunction - Debug ] (Single File Build)----------
+"C:/Program Files/mingw-w64/mingw64/bin/g++.exe"  -c  "D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/07_PureVirtualFunction/main.cpp" -g -O0 -std=c++17 -Wall  -o Debug/main.cpp.o -I. -I.
+D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/07_PureVirtualFunction/main.cpp: In function 'int main()':
+D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/07_PureVirtualFunction/main.cpp:64:11: error: cannot declare variable 's' to be of abstract type 'Shape'
+     Shape s;
+           ^
+D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/07_PureVirtualFunction/main.cpp:4:7: note:   because the following virtual functions are pure within 'Shape':
+ class Shape{    //Abstract Base Class
+       ^~~~~
+D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/07_PureVirtualFunction/main.cpp:8:18: note: 	'virtual void Shape::draw()'
+     virtual void draw() = 0;    //pure virtual function
+                  ^~~~
+D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/07_PureVirtualFunction/main.cpp:9:18: note: 	'virtual void Shape::rotate()'
+     virtual void rotate() = 0;  //pure virtual function
+                  ^~~~~~
+D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/07_PureVirtualFunction/main.cpp:65:26: error: invalid new-expression of abstract class type 'Shape'
+     Shape *p = new Shape();
+                          ^
+D:/Studies/CPP_udemy_practice/CPP_workspaces/Section16/07_PureVirtualFunction/main.cpp:65:12: warning: unused variable 'p' [-Wunused-variable]
+     Shape *p = new Shape();
+            ^
+mingw32-make.exe: *** [07_PureVirtualFunction.mk:98: Debug/main.cpp.o] Error 1
+====2 errors, 4 warnings====
+
+
+Example2:
+===========
+#include <iostream>
+#include <vector>
+
+class Shape{    //Abstract Base Class
+private:
+    //Abstract Base Class Data;
+public:
+    virtual void draw() = 0;    //pure virtual function
+    virtual void rotate() = 0;  //pure virtual function
+    virtual ~Shape(){
+        std::cout << "Destroying Shape" << std::endl;
+    }
+
+};
+class Open_Shape : public Shape{    //Abstarct Class
+private:
+    //Abstract Open_Shape data
+public:
+    virtual ~Open_Shape() {}
+};
+
+class Close_Shape : public Shape{    //Abstarct Class
+private:
+    //Abstract Close_Shape data
+public:
+    virtual ~Close_Shape() {}
+};
+
+class Circle : public Shape{
+private:
+    //Circle data
+public:
+    virtual void draw() override{
+        std::cout << "Drawing a Circle" << std::endl;
+    }
+    
+    virtual void rotate() override{
+        std::cout << "Rotateing a Circle" << std::endl;
+    }
+    virtual ~Circle()
+    {
+        std::cout << "Destroying Circle" << std::endl;
+    }
+};
+
+class Line : public Shape{
+private:
+    //Circle data
+public:
+    virtual void draw() override{
+        std::cout << "Drawing a Line" << std::endl;
+    }
+    
+    virtual void rotate() override{
+        std::cout << "Rotateing a Line" << std::endl;
+    }
+    virtual ~Line()
+    {
+        std::cout << "Destroying Line" << std::endl;
+    }
+};
+int main()
+{
+    //Shape s;
+    //Shape *p = new Shape();
+    Circle c;
+    c.draw();
+	return 0;
+}
+
+op:
+====
+Drawing a Circle
+Destroying Circle
+Destroying Shape
+Press any key to continue . . .
+
+Example3:
+==============
+#include <iostream>
+#include <vector>
+
+class Shape{    //Abstract Base Class
+private:
+    //Abstract Base Class Data;
+public:
+    virtual void draw() = 0;    //pure virtual function
+    virtual void rotate() = 0;  //pure virtual function
+    virtual ~Shape(){
+        std::cout << "Destroying Shape" << std::endl;
+    }
+
+};
+class Open_Shape : public Shape{    //Abstarct Class
+private:
+    //Abstract Open_Shape data
+public:
+    virtual ~Open_Shape() {}
+};
+
+class Close_Shape : public Shape{    //Abstarct Class
+private:
+    //Abstract Close_Shape data
+public:
+    virtual ~Close_Shape() {}
+};
+
+class Circle : public Shape{
+private:
+    //Circle data
+public:
+    virtual void draw() override{
+        std::cout << "Drawing a Circle" << std::endl;
+    }
+    
+    virtual void rotate() override{
+        std::cout << "Rotateing a Circle" << std::endl;
+    }
+    virtual ~Circle()
+    {
+        std::cout << "Destroying Circle" << std::endl;
+    }
+};
+
+class Line : public Shape{
+private:
+    //Circle data
+public:
+    virtual void draw() override{
+        std::cout << "Drawing a Line" << std::endl;
+    }
+    
+    virtual void rotate() override{
+        std::cout << "Rotateing a Line" << std::endl;
+    }
+    virtual ~Line()
+    {
+        std::cout << "Destroying Line" << std::endl;
+    }
+};
+int main()
+{
+    //Shape s;
+    //Shape *p = new Shape();
+    //Circle c;       
+    //c.draw();   //Statically Bound
+    
+    Shape *ptr = new Circle();
+    ptr->draw();    //Dynamically Bound
+    ptr->rotate();  //Dynamically Bound
+    delete ptr;
+	return 0;
+}
+
+Op:
+=====
+Drawing a Circle
+Rotateing a Circle
+Destroying Circle
+Destroying Shape
+
+
+Example 4:
+============
+#include <iostream>
+#include <vector>
+
+class Shape{    //Abstract Base Class
+private:
+    //Abstract Base Class Data;
+public:
+    virtual void draw() = 0;    //pure virtual function
+    virtual void rotate() = 0;  //pure virtual function
+    virtual ~Shape(){
+        std::cout << "Destroying Shape" << std::endl;
+    }
+
+};
+class Open_Shape : public Shape{    //Abstarct Class
+private:
+    //Abstract Open_Shape data
+public:
+    virtual ~Open_Shape() {}
+};
+
+class Close_Shape : public Shape{    //Abstarct Class
+private:
+    //Abstract Close_Shape data
+public:
+    virtual ~Close_Shape() {}
+};
+
+class Circle : public Shape{
+private:
+    //Circle data
+public:
+    virtual void draw() override{
+        std::cout << "Drawing a Circle" << std::endl;
+    }
+    
+    virtual void rotate() override{
+        std::cout << "Rotateing a Circle" << std::endl;
+    }
+    virtual ~Circle()
+    {
+        std::cout << "Destroying Circle" << std::endl;
+    }
+};
+
+class Line : public Shape{
+private:
+    //Circle data
+public:
+    virtual void draw() override{
+        std::cout << "Drawing a Line" << std::endl;
+    }
+    
+    virtual void rotate() override{
+        std::cout << "Rotateing a Line" << std::endl;
+    }
+    virtual ~Line()
+    {
+        std::cout << "Destroying Line" << std::endl;
+    }
+};
+
+class Square : public Shape{
+private:
+    //Circle data
+public:
+    virtual void draw() override{
+        std::cout << "Drawing a Square" << std::endl;
+    }
+    
+    virtual void rotate() override{
+        std::cout << "Rotateing a Square" << std::endl;
+    }
+    virtual ~Square()
+    {
+        std::cout << "Destroying Square" << std::endl;
+    }
+};
+int main()
+{
+    //Shape s;
+    //Shape *p = new Shape();
+    //Circle c;       
+    //c.draw();   //Statically Bound
+    
+    //Shape *ptr = new Circle();
+    //ptr->draw();    //Dynamically Bound
+    //ptr->rotate();  //Dynamically Bound
+    Shape *s1 = new Line();
+    Shape *s2 = new Square();
+    Shape *s3 =  new Circle();
+    
+    std::vector <Shape *> shapes {s1,s2,s3};
+    for(const auto s:shapes)
+    {
+        s->draw();
+        s->rotate();
+        std::cout << "\n===============\n" << std::endl;
+    }
+   // delete ptr;
+    delete s1;
+    delete s2;
+    delete s3;
+	return 0;
+}
+
+op:
+======
+Drawing a Line
+Rotateing a Line
+
+===============
+
+Drawing a Square
+Rotateing a Square
+
+===============
+
+Drawing a Circle
+Rotateing a Circle
+
+===============
+
+Destroying Line
+Destroying Shape
+Destroying Square
+Destroying Shape
+Destroying Circle
+Destroying Shape
+
+
+Example 5:
+============
+#include <iostream>
+#include <vector>
+
+class Shape{    //Abstract Base Class
+private:
+    //Abstract Base Class Data;
+public:
+    virtual void draw() = 0;    //pure virtual function
+    virtual void rotate() = 0;  //pure virtual function
+    virtual ~Shape(){
+        std::cout << "Destroying Shape" << std::endl;
+    }
+
+};
+class Open_Shape : public Shape{    //Abstarct Class
+private:
+    //Abstract Open_Shape data
+public:
+    virtual ~Open_Shape() {}
+};
+
+class Close_Shape : public Shape{    //Abstarct Class
+private:
+    //Abstract Close_Shape data
+public:
+    virtual ~Close_Shape() {}
+};
+
+class Circle : public Shape{
+private:
+    //Circle data
+public:
+    virtual void draw() override{
+        std::cout << "Drawing a Circle" << std::endl;
+    }
+    
+    virtual void rotate() override{
+        std::cout << "Rotateing a Circle" << std::endl;
+    }
+    virtual ~Circle()
+    {
+        std::cout << "Destroying Circle" << std::endl;
+    }
+};
+
+class Line : public Shape{
+private:
+    //Circle data
+public:
+    virtual void draw() override{
+        std::cout << "Drawing a Line" << std::endl;
+    }
+    
+    virtual void rotate() override{
+        std::cout << "Rotateing a Line" << std::endl;
+    }
+    virtual ~Line()
+    {
+        std::cout << "Destroying Line" << std::endl;
+    }
+};
+
+class Square : public Shape{
+private:
+    //Circle data
+public:
+    virtual void draw() override{
+        std::cout << "Drawing a Square" << std::endl;
+    }
+    
+    virtual void rotate() override{
+        std::cout << "Rotateing a Square" << std::endl;
+    }
+    virtual ~Square()
+    {
+        std::cout << "Destroying Square" << std::endl;
+    }
+};
+
+void screen_refresh(const std::vector<Shape *> &shapes)
+{
+    for(auto p:shapes)
+    {
+        p->draw();
+        p->rotate();
+        std::cout << "\n===============\n" << std::endl;
+    }
+}
+int main()
+{
+    //Shape s;
+    //Shape *p = new Shape();
+    //Circle c;       
+    //c.draw();   //Statically Bound
+    
+    //Shape *ptr = new Circle();
+    //ptr->draw();    //Dynamically Bound
+    //ptr->rotate();  //Dynamically Bound
+    Shape *s1 = new Line();
+    Shape *s2 = new Square();
+    Shape *s3 =  new Circle();
+    
+    std::vector <Shape *> shapes {s1,s2,s3};
+ //   for(const auto s:shapes)
+ //   {
+ //       s->draw();
+ //       s->rotate();
+ //       std::cout << "\n===============\n" << std::endl;
+ //   }
+    
+    screen_refresh(shapes);
+   // delete ptr;
+    delete s1;
+    delete s2;
+    delete s3;
+	return 0;
+}
+op:
+=====
+Drawing a Line
+Rotateing a Line
+
+===============
+
+Drawing a Square
+Rotateing a Square
+
+===============
+
+Drawing a Circle
+Rotateing a Circle
+
+===============
+
+Destroying Line
+Destroying Shape
+Destroying Square
+Destroying Shape
+Destroying Circle
+Destroying Shape
