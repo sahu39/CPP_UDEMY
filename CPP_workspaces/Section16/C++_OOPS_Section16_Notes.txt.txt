@@ -1318,3 +1318,53 @@ Destroying Square
 Destroying Shape
 Destroying Circle
 Destroying Shape
+
+======================================================================================================================================================
+															Abstract classes as interface
+															==============================
+-An abstract class which has only pure virtual functions.
+-Provides as public.
+-Each subclass is free to implement these services as needed.
+-Every method should be implemented in the subclass.
+-The service type information is strictly enforced.
+-In c++ we use abstract classess with pure virtual functions to acheive the concept of interface.
+
+An Printable Example:
+======================
+class Printable{
+	friend std::ostream &operator<<(std::ostream &os,const Printable &obj );
+public:
+	virtual void print(ostream &os) const = 0;
+	virtual ~Printable(){};
+	. . .
+};
+
+std::ostream &operator<<(std::ostream &os,const Printable &obj)
+{
+	obj.print(os);		//This will dynamically binds the print() function whatever object passed to "Printable" &obj
+	return(os);
+}
+
+class Any_Class : Printable{		//"Any_Class" is derived from "Printable"
+public:
+	virtual void print(ostream &os) override{	//overriding print() of base class "Printable"
+		os << "Hi From Any class";
+	}
+	. . .
+};
+
+Any_Class *ptr = new Any_Class();
+cout << ptr << endl;				//"Hi From Any class"
+
+void function1(Any_class &obj)
+{
+	cout << obj << endl;			////"Hi From Any class"
+}
+
+void function2(Printable &obj)		//"Any_Class" IS-A "Printable"
+{
+	cout << obj << endl;			////"Hi From Any class"
+}
+
+function1(*ptr);					//Hi From Any Class
+function2(*ptr);					//Hi From Any Class
