@@ -1,0 +1,147 @@
+																Smart Pointers
+																==============
+Issues with Raw pointers:
+=========================
+-Absolute Flexibility with raw pointers. some time leads to complexity.
+-----------------------------------------------------------------------
+-allocation
+-deallocation
+-Lifetime management.
+
+Some Pottentially serious problems:
+======================================
+-Uninitialized(wild) pointers.
+-Memory leaks.
+-Dangling Pointers.
+-Not exception safe.
+
+Ownership:
+==========
+-Who owns the pointer?
+-When should a pointer deleted?
+
+
+
+What is Samrt Pointers:
+============================
+-Objects.
+-Implemented as c++ template classes which we can instantiate.
+-Can only point to heap allocated memory.
+-Automatically delete when no longer needed.
+-Adhere to RAII principles.
+-C++ Smart Pointers:
+ --------------------
+ -Unique Pointers(unique_ptr)
+ -Shared Pointers(shared_ptr)
+ -Weak Pointers(weak_ptr)
+ -Auto Pointer(auto_ptr)
+ 
+How to include Smart pointers:
+=================================
+#include <memory>
+
+Defined by class templates:
+=============================
+-Wrapper around a raw pointer.
+-Overloaded operators:
+ ----------------------
+ -Derference(*)
+ -Member selection(->)
+ -Pointer Arithmatic is not supported(++,--,etc)
+ 
+-Can have custom deleters.
+
+
+Syntax:
+===========
+a simple example:
+==================
+				{
+					std::smart_pointer<Some_Class> ptr = . . .
+					ptr->method();
+					cout << *ptr << endl;
+					
+				}
+
+//ptr will be destroyed automatically when no longer needed.
+//In this example when the pointer goes out of scope the smart pointer destructor is called automatically and takes care of allocated storage
+  in heap area.
+  
+  
+==================================================================================================================================================
+
+RAII:(Resource Acqusition Is Initialization)
+================================================
+-Common Idiom or Pattern used in software design based on container object lifetime.
+-RAII objects are allocated on the stack.
+-Resource Acquisition:
+==========================
+	-open a file.
+	-Allocate memory.
+	-Acquire a lock.
+-Is Initialization:
+====================
+	-The resource is acquired in a constructor.
+	
+-Resource relinquishing:
+=======================
+	-Happens in the destructor:
+	----------------------------
+		-Close the file
+		-Deallocate the memory.
+		-Release the lock.
+		
+===================================================================================================================================================
+													Unique Pointers
+													===============
+A Simple Smart Pointer-very efficient.
+
+-unique_ptr<T>
+----------------
+	-Points to an object of type T on the heap.
+	-It is unique - there can only be unique_ptr<T> pointing to the object on the heap.
+	-Owns what it points to.
+	-Cannot be copied or assigned.(You will get an error when you will assign or copy)
+	-Can be moved.
+	-When the pointer is destroyed , what it points to is automatically destroyed. The object is automatically cleaned out from the heap.
+	
+-Unique pointer:(Creating, Initializing and using)
+----------------
+	{
+		std::unique_ptr<int> p1 {new int{100}};
+		std::cout << *p1 <<std::endl; //100
+		std::cout << p1.get() << std::endl //0x564388  (returns the pointer to the managed object)
+		*p1 = 200;
+		std::cout << *p1 << std::endl;
+		p1.reset(); //p1 is now nullptr and memory it's points to is released.
+		if(p1)
+			std::cout << *p1 << std::endl;	//won't execute
+	}//automaticall deleted
+	
+	
+-unique_ptr - user defined classes:
+----------------------------------	
+	{
+		std::unique_ptr<Account> p1 {new Account{"Larry"}};
+		std::cout << *p1 << std::endl;	//display Account
+		
+		p1->deposit(1000);
+		p1->withdraw(500);
+	}//Automatically deleted
+
+-unique_ptr - vectors and move:
+---------------------------------
+	{
+		std::vector<std::unique_ptr<int>> vec;
+		std::unique_ptr<int> ptr {new int{100}};
+		vec.push_back(ptr);	//Error - Copy not allowed
+		vec.push_back(std::move(ptr));
+	}//automatically deleted
+
+-unique_ptr - make_unique(c++14):
+-------------------------------------
+	{
+		std::unique_ptr<int> p1 = make_unique<int>(100);
+		std::unique_ptr<Account> p2 = make_unique<Account>("Curly",5000);
+		auto p3 = make_unique<Player>("Hero",100,100);
+	}//automatically deleted
