@@ -224,3 +224,26 @@ shared_ptr - make_shared(c++ 11):
 		ptr3 = ptr1;											//use_count = 3
 	}//automatically deleted
 	
+=========================================================================================================================================================
+																Weak Pointer:
+																==============
+-Provides non owning to a "weak" reference.
+
+-weak_ptr<T>:
+================
+	-Points to an object of type T.
+	-Does not participate in owning relationship.
+	-Always created from shared_ptr;
+	-Does not increment or decrement reference use count.
+	-Used to prevent strong reference cycles which could prevent objects from deleted.
+	
+	
+weak_ptr:circular or cyclic reference(because using shared_ptr will cause a memory leak)
+=======================================
+A refers to A;
+B refers to B;
+shared strong ownership prevents heap deallocation.
+
+
+
+
