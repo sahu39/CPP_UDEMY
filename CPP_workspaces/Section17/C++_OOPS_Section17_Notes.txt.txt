@@ -145,3 +145,82 @@ A Simple Smart Pointer-very efficient.
 		std::unique_ptr<Account> p2 = make_unique<Account>("Curly",5000);
 		auto p3 = make_unique<Player>("Hero",100,100);
 	}//automatically deleted
+	
+=======================================================================================================================================================
+												Shared_Pointer:
+												=================
+-Provides shared ownership of heap object.
+
+-shared_ptr<T>:
+===================
+-Points to an object of type T in the heap.
+-It is not unique-There can be many shared_ptrs pointing to the same object on the heap.
+-Establishes shared ownership relationship.
+-CAN be assigned and copied.
+-Can be moved.
+-Doesn't support managing arrays by default.
+-When the use_count is 0, then the managed object on the heap is destroyed.
+-We can have multiple shared_pointers all referencing a same object in the heap area. So how do we know when the object needs to be destroyed?
+--------------------------------------------------------------------------------------------------------------------------------------------------
+-using reference counting.
+-Everytime we instantiate a shared pointer object and a point of reference to heap object we increment the counter. This counter simply has the
+ number of shared pointers that is referencing to the heap object.
+-When the use_count is 0, then the managed object on the heap is destroyed.
+
+shared_ptr - creating,initializing and using:
+=================================================
+	{
+		std::shared_ptr<int> p1 {new int{100}};
+		std::cout << *p1 << std::endl;//100
+		*p1 = 200;
+		std::cout << *p1 << std::endl;//200
+	}//automatically deleted
+	
+	
+shared_ptr - some useful methods:
+====================================
+	{
+		//use_count - the number of shared_ptr objects managing the heap object.
+		std::shared_ptr<int> p1 {new int{100}};
+		std::cout << p1.use_count() << std::endl;		//1
+		
+		std::shared_ptr<int> p2 {p1};					//shared ownership
+		std::cout << p1.use_count() << std::endl;		//2
+		
+		p1.reset()										//decrement the use_count; p1 is nulled out
+		std::cout << p1.use_count << std::endl;			//0
+		std::cout << p2.use_count << std::endl;			//1
+	}//automaticall deleted
+	
+	
+shared_ptr - User Defined Class:
+=================================
+	{
+		std::shared_ptr<Account> p1 {new Account{"Larry"}};
+		std::cout << *p1 << std::endl;
+		
+		p1->deposit(1000);
+		p1->withdraw(500);
+	}//automatically deleted
+	
+	
+shared_ptr - vectors and move:
+=================================
+	{
+		std::vector<std::shared_ptr<int>> vec;
+		std::shared_ptr<int> ptr {new int{100}};
+		
+		vec.push_back(ptr);		//OK -copy is allowed
+		std::cout << ptr.use_count() << std::endl;		//2
+	}//automatically deleted
+	
+	
+shared_ptr - make_shared(c++ 11):
+====================================
+	{
+		std::shared_ptr<int> ptr = std::make_shared<int>(100);	//use_count = 1
+		std::shared_ptr<int> ptr2 {ptr};						//use_count = 2
+		std::shared_ptr<int> ptr3;
+		ptr3 = ptr1;											//use_count = 3
+	}//automatically deleted
+	
