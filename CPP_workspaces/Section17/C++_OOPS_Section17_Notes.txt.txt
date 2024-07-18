@@ -244,6 +244,47 @@ A refers to A;
 B refers to B;
 shared strong ownership prevents heap deallocation.
 
+=========================================================================================================================================================
+															Custom Deleters
+															=================
+-Sometimes when we destroys a smart pointer we need more than to just destroy the object on the heap.
+-These are special use-cases.
+-Lots of ways to acheive this.
+--------------------------------------
+	-Functions
+	-Lambdas
+	-Others
+	
+Custom deleter function:
+==========================
+			void my_deleter(Some_class *raw_pointer){
+				delete raw_pointer;
+			}
+			
+			std::shared_ptr<Some_class> ptr {new Some_class{}, my_deleter};
+			
+			
+e.g:
+-------
+			void my_deleter(Test *ptr)
+			{
+				cout << "In my custom deleter" << endl;
+				delete ptr;
+			}
+			
+			shared_ptr<Test> ptr {new Test{},my_deleter};
+			
+Custom deleters - lambda:
+=========================
+lambda:
+----------
+It is an anonymous function that is the function does not have name and could be defined inline where we expect to use it.
+
+			std::shared_ptr<Test> ptr (new Test{1000},[](Test *ptr){
+				std::cout<< "\tUsing my custom deleter" << std::endl;
+				delete ptr;
+			});
+
 
 
 
