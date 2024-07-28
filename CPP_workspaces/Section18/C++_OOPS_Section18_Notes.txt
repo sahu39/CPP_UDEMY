@@ -1,0 +1,105 @@
+																Exception Handling
+																==================
+What is Exception Handling:
+=============================
+-Dealing with extra ordinary situations.(Dependend upon application and designer)
+-Indicates that an extraordinary situation has been detected or has occured.
+-Program can deal with the extraordinary situations in suitable manner.
+
+
+What causes exceptions?
+==========================
+-Insufficient resources.(Out of memory and no external source)
+-Missing resources.(Open and read a file but the file does not exists.)
+-Invalid operations.
+-range violations.
+-underflows and overflows.
+-Illegal data and many others.
+
+
+Exception Safe:
+================
+-Our program should set for exception safe when our code handles exceptions.
+
+Terminology:
+=================
+-Exception:
+-------------
+-An object or primitive(int,double or boolean) that signals that an error has occured.
+
+-Throwing an exception(Raising an exception):
+----------------------------------------------
+-Your code detects that an error has occured.
+-The place where the error occured may not know how to handle the error.
+-Code can throw an exception describing the error to another part of the program that knows how to handle the error.
+
+
+Catching an exception:
+------------------------
+-code that handles the exception.
+-may or may not cause the program to terminate.
+
+C++ syntax:
+================
+throw:
+-------
+-Throws an exception.
+-Followed by an argument.
+
+try{Code that may throw an exception.}:
+------------------------------------------
+-You place code that may throw an exception in a try block.
+-If the code throw an exception then the try block is exited.
+-The thrown exception is handled by catch handler.
+-if no catch handler exists then the program terminates.
+
+catch(Exception ex){code to handle the exception}:
+--------------------------------------------------
+-code that handles exception.
+-can have multiple catch handlers.
+-may or may not cause the program to terminate.
+
+Divide by zero example:
+=========================
+double average {};
+try{						//try block
+	if(total == 0)
+	 throw 0;				//throw exception
+	average = sum / total;	//Won't execute if total == 0
+	//use average here
+	 
+}
+catch(int &ex){				//exception handler
+	std::cerr<<"Can't divide by zero" << std::endl;
+}
+
+std::cout << Program continues << std::endl;
+
+Throwing an exception from function:
+======================================
+
+double calculate_avg(int sum, int total){
+	return static_cast<double>(sum)/total;
+}
+
+Throw an exception if we can't complete successfully:
+-------------------------------------------------------
+double calculate_avg(int sum, int total){
+	if(total == 0)
+		throw 0;
+	return static_cast<double>(sum)/total;
+}
+
+Catching an exception thrown from a function
+
+double average{};
+
+try{
+	average =  calculate_avg(sum,total);
+	std::cout<< average << std::endl;
+}
+catch(int &ex)
+{
+	std::cerr<<"You can't divide by zero" << std::endl;
+}
+
