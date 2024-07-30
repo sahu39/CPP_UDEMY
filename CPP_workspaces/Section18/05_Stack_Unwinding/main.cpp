@@ -17,14 +17,20 @@ void fun_b()
 void fun_c()
 {
     std::cout<< "Starting fun_c" << std::endl;
-    //fun_b();
+    throw 100;
     std::cout<< "Ending fun_c" << std::endl;
 }
 
 int main()
 {
     std::cout<<"Starting Main" << std::endl;
-    fun_a();
+    try{
+        fun_a();
+    }
+    catch(int &ex)
+    {
+        std::cout<<"Caught error in main" << std::endl;
+    }
     std::cout<<"Finishing Main" << std::endl;
 	return 0;
 }
