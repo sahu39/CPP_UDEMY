@@ -103,3 +103,25 @@ catch(int &ex)
 	std::cerr<<"You can't divide by zero" << std::endl;
 }
 
+===================================================================================================================================================
+														Stack unwinding in Exception Handling
+														=====================================
+If an exception thrown but not caught in the current scope c++ tries to find handler for exception by unwinding the stack.
+
+-Function in which the exception was not caught terminates and is removed from the call stack.
+-If a try block was used then catch blocks are checked for a match.
+-If a no try block was used or catch handler doesn't match stack unwinding occurs again.
+-If the stack unwound back to main and no catch handler handles the exception the program terminates.
+
+-When a function is removed or poped from the stack.
+-----------------------------------------------------
+-All of its local variables are destroyed.
+-This means for the local object destructor's are called.
+-If we have to free memory with delete then this statement may not executes at all and then it will lead to leak memory.
+-This makes it critical that you implement class that requires resources as RAII classes.
+-Make sure you clean up your resources in your destructor since you never know when they are going to be called and you do not want to leak any memory or
+ leak files and resource in ustable states.
+ 
+
+
+
