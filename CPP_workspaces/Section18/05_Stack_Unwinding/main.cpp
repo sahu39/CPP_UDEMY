@@ -11,7 +11,14 @@ void fun_a()
 void fun_b()
 {
     std::cout<< "Starting fun_b" << std::endl;
-    fun_c();
+    try{
+        fun_c();
+    }
+    catch(int &ex)
+    {
+        std::cout<<"Caught error in fun_b" << std::endl;
+    }
+
     std::cout<< "Ending fun_b" << std::endl;
 }
 void fun_c()
