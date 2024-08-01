@@ -165,3 +165,41 @@ catch(const NegativeValueException &ex){
 }
 std::cout << "Bye" << std::endl;
 
+=======================================================================================================================================================
+													Class-level Exceptions:
+													=======================
+Exceptions can also thrown from within a class.
+
+-Methods:
+===========
+-They works as same way they do for functions as we have seen.
+Constructor:
+=============
+-Constructors may fail.
+-Constructors do not return any value.
+-Throw an exception from constructor if you can not initialize an object.
+-Suppose you are allocating memory dynamically and you are unable to allocate it.
+-Or If you open a file in constructor but the file does not exist.
+-In case one of these constructor can throw an exception.
+
+Destructor:
+===========
+-Do not throw an exception from your Destructor.
+
+
+Class Level Exception:
+======================
+Account::Account(std::string name, double balance)
+	:name{name},balance{balance}{
+	if(balance < 0.0)
+		throw IllegalBalanceException{};
+}
+
+try{
+	std::unique_ptr<Account>moes_Account = 
+		std::make_unique<Checking_Account>("Moe",-10.0);
+}
+
+catch(const IllegalBalanceException &ex){
+	std::cerr<<"Could not create Account"<<std::endl;
+}
