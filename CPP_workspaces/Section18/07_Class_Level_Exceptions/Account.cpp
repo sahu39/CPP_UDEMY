@@ -1,7 +1,10 @@
 #include "Account.h"
 
 Account::Account(std::string nam,double bal)
-    :name{name},balance{bal}{}
+    :name{nam},balance{bal}{
+        if(balance < 0.0)
+            throw IllegalBalanceException{};
+}
     
 bool Account::deposit(double amount)
 {
