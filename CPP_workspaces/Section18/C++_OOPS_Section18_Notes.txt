@@ -203,3 +203,33 @@ try{
 catch(const IllegalBalanceException &ex){
 	std::cerr<<"Could not create Account"<<std::endl;
 }
+=======================================================================================================================================================-
+												The c++ std::exception class hirerchy
+												=========================================
+The c++ standard library class hirerchy:
+=========================================
+-C++ provides a class hirerchy of exception classes.
+-std::exception is the base class.
+-all sub classes implements what() virtual function.
+-We can create our own user-defined subclasses.
+
+virtual const char *what() const noexcept;----->returns c - style string that returns description of execption that has occured.
+
+Deriving our subclass from class exception:
+============================================
+class IllegalBalanceException:public std::exception{
+public:
+	IllegalBalanceException() noexcept = default;
+	~IllegalBalanceException() = default;
+	
+	virtual const char *what() const noexcept{
+		return "Illegal Balance Exception";
+	}
+	
+};
+
+Notes:
+======
+noexcept------>the method would not throw any exception, Don't throw exceptions from these methods.
+
+
