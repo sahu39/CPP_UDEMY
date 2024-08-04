@@ -2,6 +2,7 @@
 #define _ACCOUNT_H
 #include <iostream>
 #include <string>
+#include "IllegalBalanceException.h"
 class I_printable{
     friend std::ostream& operator<<(std::ostream &os,const I_printable &obj);
 public:
