@@ -1,0 +1,93 @@
+																C++_OOPS_Section19_Notes
+																==========================
+Files, Streams and I/O:
+=========================
+-C++ uses stream abstraction to work with IO devices.
+-Stream is an interface that is independent of actual device.
+-C++ uses streams as an interface between the program and input and output devices.
+-Independent of actual devices.
+-Sequence of bytes.
+-For programmer's perceptive we can code to this stream interface and not worry what devices connect to this interface.
+-Input streams provides data to the program.
+-Output streams receives data from the program.
+
+common header files;
+======================
+iostream-------------Provides definitions for formatted input and output from/to streams.
+fstream--------------Provides definitions for formatted input and output from/to file streams.
+iomanip--------------Provides definitions for manipulators used format stream I/O
+
+Commonly used stream classes:
+================================
+ios------------Provides basic supports for formatted and unformatted I/Ooperations,
+iftream--------Provides high level input operations on file based streams.
+ofstream-------Provides high level ouptput operations on file based streams.
+fstream--------Provides high level I/O operations on file based streams Derived from ofstream & ifstream
+stringstream---Provides for high level I/O operations on memory based strings Derived from istringstream ans ostringstream 
+
+Global Stream objects:
+=======================
+cin-Standard Input stream-by default connected to standard input device(keyboard)--Instance of istream
+cout-Standard Output stream-by default connected to standard output device(console)--Instance of ostream
+cerr-Standard error stream-by default connected to standard error device(console)--Instance of ostream (unbuffered)
+cerr-Standard log stream-by default connected to standard log device(console)--Instance of ostream (unbuffered)
+
+========================================================================================================================================================
+Stream Manipualtors:
+===================
+-Streams have useful member functions to control formatting.
+-Can be used on input and output streams.
+-The time of the effect on the stream varies.
+-Can be used as member functions or as manipulato
+	std::cout.width(10);			//Member Function
+	std::cout << std::setw(10)		//Manipualtor
+
+Common Stream Manipualtor:
+-------------------------
+-Boolean:
+-----------
+		-boolalpha, noboolalpha
+-Integer:
+---------
+		-dec,hex,oct,showbase,noshowbase,showpos,noshowpos,uppercase,nouppercase
+-Floating point:
+-----------------
+		-fixed,scientific,setprecission,showpoint,noshowpoint,showpos,noshowpos
+-Filed,width,justification,and fill:
+--------------------------------------
+		-setw,left,right,internall,setfill
+-others:
+-------
+		-endl,flush,skipws,noskipws,ws
+		
+========================================================================================================================================================
+													Stream Operators(Boolean)
+													=========================
+-Default when display booleans values is 1 and 0.
+-Sometimes the strings true or false are more appropriate.
+				
+				std::cout << std::boolalpha;
+				
+				std::cout << (10==10) << std::endl;
+				std::cout << (10==20) << std::endl;
+				
+				will display
+				true
+				false
+				
+				std::cout << std::noboolalpha; //1 or 0
+				
+				
+Method version:
+----------------
+std::cout.self(std::ios::boolalpha);
+std::cout.self(std::ios::noboolalpha);
+
+Reset to default:
+-------------------
+std::cout<<std::resetiosflags(std::ios::boolalpha);
+
+				
+				
+				
+
