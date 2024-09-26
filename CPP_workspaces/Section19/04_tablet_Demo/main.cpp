@@ -16,7 +16,8 @@ int main()
     std::cout << "First score at index 0:" << test_scores.at(0) << std::endl;
     std::cout << "Second score at index 1:" << test_scores.at(1) << std::endl;
     std::cout << "Third score at index 3:" << test_scores.at(2) << std::endl;
-    
+    std::string hello{"Hello Xioami pad 6"};
+    std::cout << hello << std::endl;
     std::cout<<"Hello World";
 
     return 0;
