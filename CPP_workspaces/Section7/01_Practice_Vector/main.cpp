@@ -1,11 +1,3 @@
-/******************************************************************************
-
-Welcome to GDB Online.
-  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
-  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
-  Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
 #include <iostream>
 #include <vector>
 
@@ -63,8 +55,29 @@ int main()
     cout << test_scores.at(3) << endl;
     cout << test_scores.at(4) << endl;
     
+    cout << "There are now " << test_scores.size() << " elements present in the test_scores" << endl;
+    //cout << "This should cause an exception" << test_scores.at(10) << std::endl;
+    
+    //Example of 2D vector
+    vector <vector <int>> movie_ratings
+    {
+        {1,2,3},
+        {4,5,6},
+        {7,8,9},
+    };
+    
+    cout << "Here is the movie ratings of the movies using array syntax of reviewer #1" << endl;
+    cout << movie_ratings[0][0] << endl;
+    cout << movie_ratings[0][1] << endl;
+    cout << movie_ratings[0][2] << endl;
+    
+    cout << "Here is the movie ratings of the movies using vector syntax of reviewer #2" << endl;
+    cout << movie_ratings.at(1).at(0) << endl;
+    cout << movie_ratings.at(1).at(1) << endl;
+    cout << movie_ratings.at(1).at(2) << endl;
     
     
+        
    
     
     
