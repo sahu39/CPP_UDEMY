@@ -6,6 +6,7 @@ using namespace std;
 
 int main()
 {
+#if 0
     char first_name[20];
     char last_name[20];
     char my_name[20];
@@ -27,8 +28,9 @@ int main()
     strcat(my_name," ");
     strcat(my_name,last_name);
     cout << "Your full name is :" << my_name << endl;
-    
-    char full_name[50];
+#endif    
+    char full_name[20];
+    char temp[20]{};
     ///cout << "Enter your full name:";
     //cin >> full_name;
     
@@ -39,6 +41,35 @@ int main()
     cin.getline(full_name,50);
     cout << "\nYour full name is:" << full_name << endl;
     
+    cout << "-------------------------------------" << endl;
+    strcpy(temp,full_name);
+    if(strcmp(temp,full_name) == 0)
+    {
+        cout << "both " << full_name << " and " << temp << " are equal" << endl;
+    }
+    else
+    {
+        cout << "both " << full_name << " and " << temp << " are not equal" << endl;
+    }
+    cout << "-----------------------" << endl;
+    
+    for(size_t t{0};t<strlen(full_name);t++)
+    {
+        if(isalpha(full_name[t]))
+            full_name[t] = toupper(full_name[t]);
+    }
+    
+    if(strcmp(temp,full_name) == 0)
+    {
+        cout << "both " << full_name << " and " << temp << " are equal" << endl;
+    }
+    else
+    {
+        cout << "both " << full_name << " and " << temp << " are not equal" << endl;
+    }
+    cout << "-----------------------" << endl;   
+    cout << "Result of comparing " << temp << " and " << full_name << " is:" << strcmp(temp,full_name) << endl;
+    cout << "Result of comparing " << full_name << " and " << temp << " is:" << strcmp(full_name,temp) << endl;
     
        
     
