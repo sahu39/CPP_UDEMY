@@ -122,6 +122,158 @@ Formatting Integer(Different bases):
 			0377
 
 			
+===================================================================================
+												File Stream an I/O
+												==================
+input files(fstream and ifstream)
+=================================
+ftstream and istream --- used for input files
+
+1.#include <fstream>
+2.Declare an fstream or istream object.
+3.Connect it to a file in your file system(open it for reading)
+4.Read data from the file via stream.(Read by character,Read in binary mode, Read by line, We can use getline,extraction for read)
+5.Close the file.
+
+Opening a file or reading with(fstream):
+========================================
+std::fstream in_file {"../my_file.txt",std::ios::in};//2nd parameter tells open the file in input mode
+
+-Open file for reading in binary mode:
+----------------------------------------------
+std::fstream in_file {"../my_file.txt",std::ios::in | std::ios::binary};//2nd parameter tells open the file in input mode
+
+Opening a file for reading with (ifstream):
+============================================
+std::ifstream in_file {"../my_file.txt",std::ios::in};
+std::ifstream in_file {"../my_file.txt"};
+
+//Both the above statement means same
+-Open file for reading in binary mode:
+----------------------------------------------
+std::ifstream in_file {"../my_file.txt",std::ios::binary};//2nd parameter tells open the file in input mode
+
+-Open file when user gives the input file name:
+===============================================
+std::ifstream in_file;
+std::string filename;
+std::cin >> filename; //get the file name
+
+in_file.open(filename);
+//or
+in_file.open(filename, std::ios::binary);
+
+
+
+Check if file is opened successfully:
+=====================================
+if(in_file.is_open())
+{
+	//read from the file
+}else{
+	//file could not be opened
+	//Does it exist
+	//should the program terminate?
+}
+
+Check if file is opened successfully:(Just Check the object)
+=====================================
+if(in_file)
+{
+	//read from the file
+}else{
+	//file could not be opened
+	//Does it exist
+	//should the program terminate?
+}
+
+Closing the file:
+==================
+in_file.close();
+
+Reading from file using(>>)(stream extraction operator):
+=========================================================
+-We can use the extarction operator for the formatted read.
+-Same way  we used it with cin.
+
+e.g:
+----
+100
+255.67
+Larry
+
+int num {};
+double total {};
+std::string name {};
+
+
+in_file >> num;
+in_file >> total >> name;
+
+Reading from file using getline:
+================================
+test.txt:
+----------
+This is a line
+
+std::string line {};
+std::getline(in_file, line);
+
+Reading text file one line at time:
+===================================
+1st:
+---
+std::ifstream in_file{"../my_file.txt"};//open file
+std::string line{};
+
+if(!in_file){  //Check if file is open
+	std::cerr << "File open error" << std::endl;
+	return 1;;
+}
+
+while(!in_file.eof())			//while not at the end
+{
+	std::getline(in_file, line);//read a line
+	std::cout << line << std::endl;//display the line
+}
+
+in_file.close();//close the file
 			
-			
+
+2nd:
+---
+std::ifstream in_file{"../my_file.txt"};//open file
+std::string line{};
+
+if(!in_file){  //Check if file is open
+	std::cerr << "File open error" << std::endl;
+	return 1;;
+}
+
+while(std::getline(in_file, line))			//read a line
+{
+	//std::getline(in_file, line);//read a line
+	std::cout << line << std::endl;//display the line
+}
+
+in_file.close();//close the file			
+
+Reading text file one character at a time(get):
+-----------------------------------------------
+std::ifstream in_file{"../my_file.txt"};//open file
+char c;
+
+if(!in_file){  //Check if file is open
+	std::cerr << "File open error" << std::endl;
+	return 1;;
+}
+
+while(in_file.get(c))			//read a character
+{
+	//std::getline(in_file, line);//read a line
+	std::cout << c //display the character
+}
+
+in_file.close();//close the file			
+
 
