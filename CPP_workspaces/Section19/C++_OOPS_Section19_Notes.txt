@@ -277,3 +277,135 @@ while(in_file.get(c))			//read a character
 in_file.close();//close the file			
 
 
+=======================================================================
+							Field width,align and fill
+							==========================
+Default when displaying floating point values:
+=============================================
+setw:not set by default
+left:when no field width, right: when using field width
+fill:not set by default - blan space is used.
+
+Some of these manipulators affect only the next data element put on the stream.
+
+
+Deafults:
+=========
+
+double num{1234.5678};
+std::string hello{"Hello"};
+
+std::out << num << hello << std::endl;
+
+//op:
+1234.57Hello//Float has 6 digit precission.
+
+
+double num{1234.5678};
+std::string hello{"Hello"};
+
+std::cout << num << std::endl;
+std::cout << hello << std::endl;
+
+//op:
+1234.57//Float has 6 digit precission.
+Hello
+
+Field width-setw:
+=================
+e.g 1:
+-------
+double num{1234.5678};
+std::string hello{"Hello"};
+
+std::cout << std::setw(10) << num
+          << hello << std::endl;
+//Here setw will only applied to the next data item 'num' with default justification right it will not effect for item 'hello'
+//op:num is displayed right justified with widht 10 with default justification right
+123456789012345678901234567890
+   1234.57Hello
+
+
+e.g 2:
+-------
+double num{1234.5678};
+std::string hello{"Hello"};
+
+std::cout << std::setw(10) << num
+          << std::setw(10) << hello 
+		  << std::setw(10) << hello << std::endl;
+//Here setw will applied to the next data item 'num' & 'hello' with default justification right.
+//op:num & hello is displayed right justified with widht 10 with default justification right
+123456789012345678901234567890
+   1234.57     Hello     Hello
+
+Field width-setw & justification:
+================================
+e.g 1:
+--------
+double num{1234.5678};
+std::string hello{"Hello"};
+
+std::cout << std::setw(10)
+          << std::left
+		  << num	//only effects num
+		  << hello << std::endl;
+
+//op:num is left justified with field width of 10
+123456789012345678901234567890
+1234.57   Hello
+
+e.g 2:
+------
+double num{1234.5678};
+std::string hello{"Hello"};
+
+std::cout << std::setw(10) << num
+          << std::setw(10) << std::right << hello 
+		  << std::setw(15) << std::right << hello << std::endl;
+//Here setw will applied to the next data item 'num' & 'hello' with default justification right.
+//op:
+//num is displayed with width 10 with default justification right 
+//hello is displayed with right justification with width 10
+//hello is displayed with right justification with width 15
+
+1234567890123456789012345678901234567890
+   1234.57     Hello          Hello
+
+Filling fixed width - setfill:
+==============================
+e.g 1:
+------
+double num {1234.5678};
+std::string hello {"Hello"};
+
+std::cout << std::setfill('-');
+std::cout << std::setw(10) << num
+          << hello << std::endl;
+
+//op:setfill('-') will apply only to next data item 'num' not to 'hello'
+//num is displayed with right justified with field width 10 and remaining spaces will be filled with '-'
+123456789012345678901234567890
+---1234.57Hello
+
+
+
+e.g 2:
+------
+double num {1234.5678};
+std::string hello {"Hello"};
+
+std::cout << std::setfill('*');
+std::cout << std::setw(10) << num
+          << std::setfill('-') << std::setw(10) << hello 
+		  << std::setw(15)<< hello 
+		  << std::endl;
+
+//op:setfill('*') will apply only to next data item 'num'
+//setfill('-') will apply to both data item hello as it is persistent blank spaces for the 2nd item 'hello' is also filled with '-' 
+//num is displayed with right justified with field width 10 and remaining spaces will be filled with '-'
+//The 1st hello is displayed with right justified with field width 10 and remaining spaces will be filled with '-'
+//The 2nd hello is displayed with right justified with field width 10 and remaining spaces will be filled with '-'
+1234567890123456789012345678901234567890
+***1234.57-----Hello----------Hello
+
