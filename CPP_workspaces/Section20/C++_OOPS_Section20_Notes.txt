@@ -57,6 +57,7 @@ T max(T a, T b)
 }
 
 
+<<<<<<< HEAD
 Defining a class Template:
 ==============================
 template <typename T>
@@ -115,3 +116,191 @@ rbegin() and rend();------------>reverse_iterator
 cebegin() and crend();---------->const_reverse_operator
 
 
+=======
+### Templates in C++
+
+**Templates** in C++ are a powerful feature that allows you to write generic and reusable code. Instead of writing the same function or class multiple times for different data types, you can write a template, which works for any type. Templates support both functions and classes.
+
+There are two primary types of templates in C++:
+1. **Function Templates**: These allow functions to work with any data type.
+2. **Class Templates**: These allow classes to work with any data type.
+
+### 1. **Function Templates**
+A function template allows you to define a generic function that can handle different data types without explicitly overloading it for each type.
+
+#### Example: Function Template for a Swap Function
+
+```cpp
+#include <iostream>
+
+// Function template to swap two variables of any type
+template <typename T>
+void swapValues(T& a, T& b) {
+    T temp = a;
+    a = b;
+    b = temp;
+}
+
+int main() {
+    int x = 10, y = 20;
+    double a = 1.5, b = 3.7;
+    
+    swapValues(x, y);  // Swapping integers
+    swapValues(a, b);  // Swapping doubles
+    
+    std::cout << "x: " << x << ", y: " << y << std::endl;
+    std::cout << "a: " << a << ", b: " << b << std::endl;
+    
+    return 0;
+}
+```
+
+#### Output:
+```
+x: 20, y: 10
+a: 3.7, b: 1.5
+```
+
+In this example:
+- The `swapValues` function template works for both `int` and `double` types.
+- The keyword `template <typename T>` tells the compiler that `T` is a placeholder for a type that will be specified when the function is called.
+
+### 2. **Class Templates**
+A class template allows you to define a generic class that can handle multiple types of data.
+
+#### Example: Class Template for a Simple Pair
+
+```cpp
+#include <iostream>
+
+// Class template to create a pair of values of any type
+template <typename T1, typename T2>
+class Pair {
+public:
+    T1 first;
+    T2 second;
+    
+    Pair(T1 f, T2 s) : first(f), second(s) {}
+    
+    void display() const {
+        std::cout << "First: " << first << ", Second: " << second << std::endl;
+    }
+};
+
+int main() {
+    Pair<int, double> myPair(42, 3.14);
+    Pair<std::string, int> anotherPair("Age", 25);
+    
+    myPair.display();
+    anotherPair.display();
+    
+    return 0;
+}
+```
+
+#### Output:
+```
+First: 42, Second: 3.14
+First: Age, Second: 25
+```
+
+In this example:
+- `Pair` is a class template that can hold two values of any types `T1` and `T2`.
+- The `Pair<int, double>` creates a pair where `first` is an `int` and `second` is a `double`.
+- Similarly, `Pair<std::string, int>` creates a pair with a `std::string` and an `int`.
+
+### Template Specialization
+Sometimes, you might want a template to behave differently for certain data types. This is where **template specialization** comes in.
+
+#### Example: Specialization for `char*`
+
+```cpp
+#include <iostream>
+
+template <typename T>
+void print(T value) {
+    std::cout << "Generic Template: " << value << std::endl;
+}
+
+// Specialization for char*
+template <>
+void print<char*>(char* value) {
+    std::cout << "Specialized Template for char*: " << value << std::endl;
+}
+
+int main() {
+    print(10);            // Uses generic template
+    print("Hello");        // Uses specialized template for char*
+    
+    return 0;
+}
+```
+
+#### Output:
+```
+Generic Template: 10
+Specialized Template for char*: Hello
+```
+
+In this example:
+- The `print` function template is specialized for `char*` to handle it differently from other types.
+- The specialized template is used for string literals like `"Hello"`.
+
+### 3. **Template Parameters**
+Templates in C++ can have different types of parameters:
+1. **Type Parameters**: As shown in the previous examples, templates can take types as parameters using `typename` or `class` (both are equivalent).
+2. **Non-type Parameters**: Templates can also take non-type parameters, such as constants.
+
+#### Example: Non-type Template Parameters
+
+```cpp
+#include <iostream>
+
+// Template with non-type parameter
+template <typename T, int size>
+class Array {
+private:
+    T arr[size];
+    
+public:
+    void set(int index, T value) {
+        if (index >= 0 && index < size) {
+            arr[index] = value;
+        }
+    }
+    
+    T get(int index) const {
+        return arr[index];
+    }
+};
+
+int main() {
+    Array<int, 5> intArray;  // Create an array of size 5
+    
+    intArray.set(0, 10);
+    intArray.set(1, 20);
+    
+    std::cout << "Element at 0: " << intArray.get(0) << std::endl;
+    std::cout << "Element at 1: " << intArray.get(1) << std::endl;
+    
+    return 0;
+}
+```
+
+#### Output:
+```
+Element at 0: 10
+Element at 1: 20
+```
+
+In this example:
+- `Array<int, 5>` is a class template where the size of the array is determined at compile-time via a non-type parameter (`5` in this case).
+
+### Summary:
+- **Function Templates** allow you to write generic functions that work with any data type.
+- **Class Templates** allow you to define classes that work with any data type.
+- **Template Specialization** allows you to define custom behavior for specific types.
+- **Non-type Template Parameters** allow you to pass constants (like array sizes) to templates.
+
+Templates are fundamental to many C++ features such as the Standard Template Library (STL), which includes generic containers (`std::vector`, `std::list`, etc.) and algorithms.
+>>>>>>> 79b92a6e1a340614cc037fb2464518ecff023004

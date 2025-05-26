@@ -129,9 +129,125 @@ Formatting Integer(Different bases):
 			 std::cout << num2 << std::endl;//-255
 
 			
-			
+===================================================================================
+												File Stream an I/O
+												==================
+input files(fstream and ifstream)
+=================================
+ftstream and istream --- used for input files
+
+1.#include <fstream>
+2.Declare an fstream or istream object.
+3.Connect it to a file in your file system(open it for reading)
+4.Read data from the file via stream.(Read by character,Read in binary mode, Read by line, We can use getline,extraction for read)
+5.Close the file.
+
+Opening a file or reading with(fstream):
+========================================
+std::fstream in_file {"../my_file.txt",std::ios::in};//2nd parameter tells open the file in input mode
+
+-Open file for reading in binary mode:
+----------------------------------------------
+std::fstream in_file {"../my_file.txt",std::ios::in | std::ios::binary};//2nd parameter tells open the file in input mode
+
+Opening a file for reading with (ifstream):
+============================================
+std::ifstream in_file {"../my_file.txt",std::ios::in};
+std::ifstream in_file {"../my_file.txt"};
+
+//Both the above statement means same
+-Open file for reading in binary mode:
+----------------------------------------------
+std::ifstream in_file {"../my_file.txt",std::ios::binary};//2nd parameter tells open the file in input mode
+
+-Open file when user gives the input file name:
+===============================================
+std::ifstream in_file;
+std::string filename;
+std::cin >> filename; //get the file name
+
+in_file.open(filename);
+//or
+in_file.open(filename, std::ios::binary);
+
+
+
+Check if file is opened successfully:
+=====================================
+if(in_file.is_open())
+{
+	//read from the file
+}else{
+	//file could not be opened
+	//Does it exist
+	//should the program terminate?
+}
+
+Check if file is opened successfully:(Just Check the object)
+=====================================
+if(in_file)
+{
+	//read from the file
+}else{
+	//file could not be opened
+	//Does it exist
+	//should the program terminate?
+}
+
+Closing the file:
+==================
+in_file.close();
+
+Reading from file using(>>)(stream extraction operator):
+=========================================================
+-We can use the extarction operator for the formatted read.
+-Same way  we used it with cin.
+
+e.g:
+----
+100
+255.67
+Larry
+
+int num {};
+double total {};
+std::string name {};
+
+
+in_file >> num;
+in_file >> total >> name;
+
+Reading from file using getline:
+================================
+test.txt:
+----------
+This is a line
+
+std::string line {};
+std::getline(in_file, line);
+
+Reading text file one line at time:
+===================================
+1st:
+---
+std::ifstream in_file{"../my_file.txt"};//open file
+std::string line{};
+
+if(!in_file){  //Check if file is open
+	std::cerr << "File open error" << std::endl;
+	return 1;;
+}
+
+while(!in_file.eof())			//while not at the end
+{
+	std::getline(in_file, line);//read a line
+	std::cout << line << std::endl;//display the line
+}
+
+in_file.close();//close the file
 			
 
+<<<<<<< HEAD
 =====================================================================================================================================================
 														Formatting Floating point:
 														===============================
@@ -151,10 +267,299 @@ std::cout << num << std::endl;
 op:
 ====
 1.23457e+008 //Precission is 6
+=======
+2nd:
+---
+std::ifstream in_file{"../my_file.txt"};//open file
+std::string line{};
+
+if(!in_file){  //Check if file is open
+	std::cerr << "File open error" << std::endl;
+	return 1;;
+}
+
+while(std::getline(in_file, line))			//read a line
+{
+	//std::getline(in_file, line);//read a line
+	std::cout << line << std::endl;//display the line
+}
+
+in_file.close();//close the file			
+
+Reading text file one character at a time(get):
+-----------------------------------------------
+std::ifstream in_file{"../my_file.txt"};//open file
+char c;
+
+if(!in_file){  //Check if file is open
+	std::cerr << "File open error" << std::endl;
+	return 1;;
+}
+
+while(in_file.get(c))			//read a character
+{
+	//std::getline(in_file, line);//read a line
+	std::cout << c //display the character
+}
+
+in_file.close();//close the file			
+
+
+=======================================================================
+							Field width,align and fill
+							==========================
+Default when displaying floating point values:
+=============================================
+setw:not set by default
+left:when no field width, right: when using field width
+fill:not set by default - blan space is used.
+
+Some of these manipulators affect only the next data element put on the stream.
+
+
+Deafults:
+=========
+
+double num{1234.5678};
+std::string hello{"Hello"};
+
+std::out << num << hello << std::endl;
+
+//op:
+1234.57Hello//Float has 6 digit precission.
+
+
+double num{1234.5678};
+std::string hello{"Hello"};
+
+std::cout << num << std::endl;
+std::cout << hello << std::endl;
+
+//op:
+1234.57//Float has 6 digit precission.
+Hello
+
+Field width-setw:
+=================
+e.g 1:
+-------
+double num{1234.5678};
+std::string hello{"Hello"};
+
+std::cout << std::setw(10) << num
+          << hello << std::endl;
+//Here setw will only applied to the next data item 'num' with default justification right it will not effect for item 'hello'
+//op:num is displayed right justified with widht 10 with default justification right
+123456789012345678901234567890
+   1234.57Hello
+
+
+e.g 2:
+-------
+double num{1234.5678};
+std::string hello{"Hello"};
+
+std::cout << std::setw(10) << num
+          << std::setw(10) << hello 
+		  << std::setw(10) << hello << std::endl;
+//Here setw will applied to the next data item 'num' & 'hello' with default justification right.
+//op:num & hello is displayed right justified with widht 10 with default justification right
+123456789012345678901234567890
+   1234.57     Hello     Hello
+
+Field width-setw & justification:
+================================
+e.g 1:
+--------
+double num{1234.5678};
+std::string hello{"Hello"};
+
+std::cout << std::setw(10)
+          << std::left
+		  << num	//only effects num
+		  << hello << std::endl;
+
+//op:num is left justified with field width of 10
+123456789012345678901234567890
+1234.57   Hello
+
+e.g 2:
+------
+double num{1234.5678};
+std::string hello{"Hello"};
+
+std::cout << std::setw(10) << num
+          << std::setw(10) << std::right << hello 
+		  << std::setw(15) << std::right << hello << std::endl;
+//Here setw will applied to the next data item 'num' & 'hello' with default justification right.
+//op:
+//num is displayed with width 10 with default justification right 
+//hello is displayed with right justification with width 10
+//hello is displayed with right justification with width 15
+
+1234567890123456789012345678901234567890
+   1234.57     Hello          Hello
+
+Filling fixed width - setfill:
+==============================
+e.g 1:
+------
+double num {1234.5678};
+std::string hello {"Hello"};
+
+std::cout << std::setfill('-');
+std::cout << std::setw(10) << num
+          << hello << std::endl;
+
+//op:setfill('-') will apply only to next data item 'num' not to 'hello'
+//num is displayed with right justified with field width 10 and remaining spaces will be filled with '-'
+123456789012345678901234567890
+---1234.57Hello
+
+
+
+e.g 2:
+------
+double num {1234.5678};
+std::string hello {"Hello"};
+
+std::cout << std::setfill('*');
+std::cout << std::setw(10) << num
+          << std::setfill('-') << std::setw(10) << hello 
+		  << std::setw(15)<< hello 
+		  << std::endl;
+
+//op:setfill('*') will apply only to next data item 'num'
+//setfill('-') will apply to both data item hello as it is persistent blank spaces for the 2nd item 'hello' is also filled with '-' 
+//num is displayed with right justified with field width 10 and remaining spaces will be filled with '-'
+//The 1st hello is displayed with right justified with field width 10 and remaining spaces will be filled with '-'
+//The 2nd hello is displayed with right justified with field width 10 and remaining spaces will be filled with '-'
+1234567890123456789012345678901234567890
+***1234.57-----Hello----------Hello
+
+==================================================================================
+									File Stream Write:
+									=================
+Output Files(fstream and ostream):
+=================================
+fstream and ofstream are used to write into a file.
+
+Method to write to file:
+========================
+1st. #include <fstream>
+2nd. Declare an fstream or ofstream object.
+3rd. Connnect it to a file in the system(Open it for writting)
+4th. Write data to the file via stream.
+5th. Close the stream.
+
+-Output files will be newly created if that does not exist.
+-Output files will be overwritten(truncated) by default.
+-Can be opened so that new write appends.
+-Can be opened in binary or text mode.
+
+Opeening a file for wriitting(fstream):
+======================================
+std::fstream outfile {"my_file.txt",std::ios::out}; //write to it but not read
+
+Opening file for writing in binary mode:
+=======================================
+std:::fstream outfile {"my_file.txt",std::ios::out | std::ios::binary}
+
+Opening file with for writting(ofstream):
+=========================================
+std::ofstream outfile {"my_file.txt",std::ios::out};
+
+std::ios::out is optional as this is by-default for ofstream object.
+
+std::ofstream outfile {"my_file.txt"}; //is same as above
+
+Opening file for writting in binary mode(using fstream):
+======================================================
+std::ofstream outfile {"my_file.txt", std::ios::binary};
+
+
+Truncate:
+=========
+std::ofstream outfile {"my_file.txt",std::ios::trunc};
+
+Append:
+========
+std::ofstream outfile {"my_file.txt",std::ios::app};
+
+Seek to end of stream:
+=======================
+std::ofstream outfile {"my_file..txt",std::ios::ate};
+
+Opening a file with open:
+=========================
+std::ofstreamm file{};
+std::string filename {};
+cin >> filename;
+
+file.open(filename);
+
+or
+
+file.oopen(filename,std::ios::binary);
+
+
+Check if file opened successfully(is_open):
+============================================
+std::oftream file{"my_file.txt"};
+
+if(file.is_open()){
+	//file opens successfully
+}
+else{
+	//file opens failed
+}
+
+
+Check if fiile opened successfully(Checkk the stream object):
+=============================================================
+std::ofstream file{"my_file.txt"};
+
+if(file){
+	//file opened successfully
+}
+else{
+	//file opening fails
+}
+
+Closing a file:
+==================
+
+file.close();
+
+
+Writting to file using stream insertion(<<) operator:
+======================================================
+-We can use insertion operator(<<) same way we are using with cout.
+
+std::ofstream my_file {"my_file.txt"};
+
+int num {100};
+double total {10.05};
+std::string name {"scott"};
+
+
+my_file << num << "\n"
+        << total << "\n"
+		<< name << std::endl;
+
+op:
+===
+my_file.txt:
+------------
+100
+10.05
+scott
+>>>>>>> 79b92a6e1a340614cc037fb2464518ecff023004
 
 
 
 
+<<<<<<< HEAD
 double num {123456789.987654321};
 std::cout << std::setprecision(9);
 std::cout << num << std::endl;
@@ -230,3 +635,5 @@ double num {12.34};
 std::cout << num << std::endl; //12.34
 std::cout << std::showpoint
 std::cout << num << std::endl; //12.3400
+=======
+>>>>>>> 79b92a6e1a340614cc037fb2464518ecff023004
