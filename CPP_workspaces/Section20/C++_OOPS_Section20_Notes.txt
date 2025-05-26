@@ -46,7 +46,72 @@ Template :
 template <typename T>---template for functions
 template <class T>------template for class
 
+
+
+Defining a function Template:
+====================================
+template <typename T>
 T max(T a, T b)
 {
 	return (a > b) ? a : b;
 }
+
+
+Defining a class Template:
+==============================
+template <typename T>
+class Item{
+private:
+    std::string name;
+    T value;
+public:
+    Item(std::string nam,T val):name{nam},value{val}{}
+    std::string get_name()const{return name;}
+    T get_value()const{return value;}
+};
+
+
+
+Declaring iterators:
+==========================
+container_type::iterator_type iterator_name; 
+
+std::vector<int>::iterator it1;
+std::vector<int>::iterator it2;
+std::map<std::string, std::string>::iterator it3;
+std::set<char>::iterator it4;
+
+
+
+std::vector<int> vec{1,2,3};
+elements 1,2,3 stays in contigious memory;
+
+
+
+std::set<int> suits{1,2,3};
+elements 1,2,3 stays in non-contigious memory;
+
+
+Initializing iterators:
+=============================
+std::vector<int>::iterator it = vec.begin();
+
+or
+
+auto it = vec.begin();
+
+
+various iterators:
+======================
+begin() and end();  ------------> iterator
+
+
+cbegin() and cend();------------>const_iterator
+
+
+rbegin() and rend();------------>reverse_iterator
+
+
+cebegin() and crend();---------->const_reverse_operator
+
+

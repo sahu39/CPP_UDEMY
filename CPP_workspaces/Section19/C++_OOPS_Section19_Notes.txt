@@ -38,7 +38,7 @@ Stream Manipualtors:
 -Streams have useful member functions to control formatting.
 -Can be used on input and output streams.
 -The time of the effect on the stream varies.
--Can be used as member functions or as manipulato
+-Can be used as member functions or as manipulator
 	std::cout.width(10);			//Member Function
 	std::cout << std::setw(10)		//Manipualtor
 
@@ -120,8 +120,113 @@ Formatting Integer(Different bases):
 			255
 			0x3f
 			0377
+			
+			int num1{255};
+			int num2{-255};
+			
+			std::cout << std::showpos;
+			 std::cout<< num1 << std::endl;	//+255
+			 std::cout << num2 << std::endl;//-255
 
 			
 			
 			
 
+=====================================================================================================================================================
+														Formatting Floating point:
+														===============================
+Formatting Floating point-precision:
+========================================
+double num {1234.5678};
+std::cout << num << std::endl;
+
+op:
+===
+1234.57 //Precission is 6 and rounding
+
+
+double num {123456789.987654321};
+std::cout << num << std::endl;
+
+op:
+====
+1.23457e+008 //Precission is 6
+
+
+
+
+double num {123456789.987654321};
+std::cout << std::setprecision(9);
+std::cout << num << std::endl;
+
+op:
+====
+123456790  //rounding occurs
+
+Formatting Floating point type-fixed:
+========================================
+double num {123456789.987654321};
+std::cout << std::fixed;
+std::cout << num << std::endl;
+
+//Will display precission 6 from the decimal
+
+op:
+====
+12345678.987654
+
+
+
+
+double num {123456789.987654321};
+std::cout << std::precision(3) << std::fixed;
+std::cout << num << std::endl;
+
+//will display precision 3 from the decimal
+op:
+====
+123456789.988
+
+Formatting Floating point type-scientific:
+========================================
+double num {123456789.987654321};
+std::cout << std::precision(3)
+		  <<std::scientific;
+std::cout << num << std::endl;
+
+//will display precission 3
+
+1.23e+008
+
+
+Formatting Floating point type-scientific uppercase:
+=====================================================
+double num {123456789.987654321};
+std::cout << std::precision(3)
+		  <<std::scientific
+		  <<std::uppercase;
+std::cout << num << std::endl;
+
+//will display precission 3
+
+1.23E+008 //
+
+Formatting Floating point type-fixed Displsying possitive sign:
+==============================================================
+double num {123456789.987654321};
+std::cout << std::precision(3) << std::fixed;
+std::cout << num << std::endl;
+
+//will display precision 3 from the decimal
+op:
+====
++123456789.988
+
+
+Formatting Floating point type-trailling zeros
+=================================================
+double num {12.34};
+
+std::cout << num << std::endl; //12.34
+std::cout << std::showpoint
+std::cout << num << std::endl; //12.3400
